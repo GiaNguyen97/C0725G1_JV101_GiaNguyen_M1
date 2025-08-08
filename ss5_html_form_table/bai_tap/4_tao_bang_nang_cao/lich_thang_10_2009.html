@@ -5,14 +5,123 @@
     <title>Lịch tháng 10/2009</title>
     <style>
         body, html {height: 100%; margin: 0;}
-        .center-container {display: flex; justify-content: center;  align-items: center; height: 100vh;}
+        .center-container {display: flex; justify-content: center;}
         .content {padding: 20px; text-align: center;}
+        h1 {
+            font-size: 60px;
+            font-weight: bold;
+            color: blue;
+        }
+        .dong_bang1, .cot_bang1, .cot_bang1_cn, .cot_bang1_thu7, .cot_bang1_do, .cot_bang1_cam,.cot_bang1_xanh {
+            width: 119px; height: 40px;
+        }
+        .cot_bang1, .cot_bang1_cn, .cot_bang1_thu7, .cot_bang1_do, .cot_bang1_cam, .cot_bang1_xanh {
+            font-size: 30px;
+        }
+        .cot_bang1_do, .cot_bang1_cam, .cot_bang1_xanh {
+            color: white;
+        }
+        .cot_bang1_do {
+            background-color: red;
+        }
+        .cot_bang1_xanh {
+            background-color: blue;
+        }
+        .cot_bang1_cam {
+            background-color: orange;
+        }
+        .bang2 { border-collapse: collapse
+        }
+        .dong_bang2, .cot_bang2, .cot_bang2_cn, .cot_bang2_t7 {
+            border: 3px solid darkgray;
+            width: 110px; height: 50px;
+            padding: 5px;
+        }
+        .cot_bang2, .cot_bang2_cn, .cot_bang2_t7 {
+            font-size: 40px;
+        }
+        .cot_bang2_cn, .cot_bang1_cn {
+            color:red;
+        }
+        .cot_bang2_t7,.cot_bang1_thu7 {
+            color: blue;
+        }
+        sub {
+            font-size: 20px; color: black;
+        }
     </style>
 </head>
 <body>
     <div class="center-container">
         <div class="content">
             <h1>Tháng 10 - October</h1>
+            <table>
+                <tr class="dong_bang1">
+                    <th class="cot_bang1_do">C.Nhật</th>
+                    <th class="cot_bang1_cam">T.Hai</th>
+                    <th class="cot_bang1_cam">T.Ba</th>
+                    <th class="cot_bang1_cam">T.Tư</th>
+                    <th class="cot_bang1_cam">T.Năm</th>
+                    <th class="cot_bang1_cam">T.Sáu</th>
+                    <th class="cot_bang1_xanh">T.Bảy</th>
+                </tr>
+                <tr class="dong_bang1">
+                    <td class="cot_bang1_cn">Sun</td>
+                    <td class="cot_bang1">Mon</td>
+                    <td class="cot_bang1">Tue</td>
+                    <td class="cot_bang1">Wed</td>
+                    <td class="cot_bang1" >Thu</td>
+                    <td class="cot_bang1" >Fri</td>
+                    <td class="cot_bang1_thu7" >Sat</td>
+                </tr>
+            </table>
+            <table class="bang2">
+                <tr class="dong_bang2">
+                    <td class="cot_bang2_cn"></td>
+                    <td class="cot_bang2"></td>
+                    <td class="cot_bang2"></td>
+                    <td class="cot_bang2"></td>
+                    <td class="cot_bang2">1<sub>13</sub></td>
+                    <td class="cot_bang2">2<sub>14</sub></td>
+                    <td class="cot_bang2_t7">3<sub>15</sub></td>
+                </tr>
+                <tr class="dong_bang2">
+                    <td class="cot_bang2_cn">4<sub>16</sub></td>
+                    <td class="cot_bang2">5<sub>17</sub></td>
+                    <td class="cot_bang2">6<sub>18</sub></td>
+                    <td class="cot_bang2">7<sub>19</sub></td>
+                    <td class="cot_bang2">8<sub>20</sub></td>
+                    <td class="cot_bang2">9<sub>21</sub></td>
+                    <td class="cot_bang2_t7">10<sub>22</sub></td>
+                </tr>
+                <tr class="dong_bang2">
+                    <td class="cot_bang2_cn">11<sub>23</sub></td>
+                    <td class="cot_bang2">12<sub>24</sub></td>
+                    <td class="cot_bang2">13<sub>25</sub></td>
+                    <td class="cot_bang2">14<sub>26</sub></td>
+                    <td class="cot_bang2">15<sub>27</sub></td>
+                    <td class="cot_bang2">16<sub>28</sub></td>
+                    <td class="cot_bang2_t7">17<sub>29</sub></td>
+                </tr>
+                <tr>
+                    <td class="cot_bang2_cn">18<sub>1.9</sub></td>
+                    <td class="cot_bang2">19<sub>2</sub></td>
+                    <td class="cot_bang2">20<sub>2</sub></td>
+                    <td class="cot_bang2">21<sub>4</sub></td>
+                    <td class="cot_bang2">22<sub>5</sub></td>
+                    <td class="cot_bang2">23<sub>6</sub></td>
+                    <td class="cot_bang2_t7">24<sub>7</sub></td>
+                </tr>
+                <tr>
+                    <td class="cot_bang2_cn">25<sub>8</sub></td>
+                    <td class="cot_bang2">26<sub>9</sub></td>
+                    <td class="cot_bang2">27<sub>10</sub></td>
+                    <td class="cot_bang2">28<sub>11</sub></td>
+                    <td class="cot_bang2">29<sub>12</sub></td>
+                    <td class="cot_bang2">30<sub>13</sub></td>
+                    <td class="cot_bang2_t7">21<sub>14</sub></td>
+                </tr>
+            </table>
         </div>
     </div>
 </body>
