@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tính điểm trung bình 3 môn Toán Lý Hóa</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+        .center-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+        label, button {
+            margin: 10px;
+        }
+        input {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+<div class="center-container">
+    <div class="content">
+        <label for="toan">Điểm Toán</label>
+        <input id="toan" name= "toan" type="number">
+        <label for="ly">Điểm Lý</label>
+        <input id="ly" name= "ly" type="number">
+        <label for="hoa">Điểm Hóa</label>
+        <input id="hoa" name= "hoa" type="number"><br>
+        <button id="click" onclick="tinh_trung_binh_3_mon()">Tính điểm trung bình</button><br>
+        <label for="avg">Điểm trung bình 3 môn Toán Lý Hóa bằng</label>
+        <input id = "avg">
+    </div>
+</div>
+</body>
+<script>
+    const click = document.getElementById('click');
+    click.addEventListener("mouseover",mouseover);
+    click.addEventListener("mouseout",mouseout);
+    function mouseover() {
+        document.getElementById('click').style.color = "red";
+    }
+    function mouseout() {
+        document.getElementById('click').style.color = "black";
+    }
+    function tinh_trung_binh_3_mon() {
+        let toan = +document.getElementById('toan').value;
+        let ly = +document.getElementById('ly').value;
+        let hoa = +document.getElementById('hoa').value;
+        document.getElementById('avg').value = (toan + ly + hoa) / 3;
+    }
+
+</script>
+</html>
