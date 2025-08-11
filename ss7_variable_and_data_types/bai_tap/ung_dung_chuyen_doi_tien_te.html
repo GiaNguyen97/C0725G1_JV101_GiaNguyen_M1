@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ứng dụng chuyển đổi tiền tệ</title>
+    <style>
+        body, html {height: 100%; margin: 0;}
+        .center-container {display: flex; justify-content: center;}
+        .content {padding: 20px; text-align: center;}
+    </style>
+</head>
+<body>
+    <div class="center-container">
+        <div class="content">
+        <table>
+            <tr>
+                <th>Amount</th>
+                <th>From Currency</th>
+                <th>To Currency</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>
+                    <label for="amount"><input id="amount" name ="amount" type="number"></label>
+                </td>
+                <td>
+                    <select id="fromCurrency" name="fromCurrency">
+                        <option value="VND">VND</option>
+                        <option value="USD">USD</option>
+                    </select>
+                </td>
+                <td>
+                    <select id="toCurrency" name="toCurrency">
+                        <option value="VND">VND</option>
+                        <option value="USD">USD</option>
+                    </select>
+
+                </td>
+                <td>
+                    <button onclick="chuyenDoiTienTe()">Convert</button>
+                </td>
+            </tr>
+        </table>
+            <label for="ketQua">Kết quả chuyển đổi là: </label>
+            <input id="ketQua">
+        </div>
+    </div>
+</body>
+<script>
+    function chuyenDoiTienTe() {
+        let amount = +document.getElementById("Amount").value;
+        let toCurrency = document.getElementById("toCurrency").value;
+        let fromCurrency = document.getElementById("fromCurrency").value;
+        if (toCurrency === "VND" && fromCurrency === "USD") {
+            document.getElementById("ketQua").value = amount /23000;
+        }
+        else if (toCurrency === "USD" && fromCurrency === "VND") {
+            document.getElementById("ketQua").value = amount *23000;
+        }
+        else if (toCurrency === fromCurrency) {
+            document.getElementById("ketQua").value = amount;
+        }
+    }
+</script>
+</html>
