@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ứng dụng máy tính</title>
+  <style>
+    body, html {height: 100%; margin: 0;}
+    .center-container {display: flex; justify-content: center;}
+    .content {padding: 20px; text-align: center;}
+    div  { padding: 5px}
+  </style>
+</head>
+<body>
+<div class="center-container">
+  <div class="content">
+    <h1>Caculator</h1>
+    <div>
+      <input id="a" type="number">
+      <input id="b" type="number"><br>
+    </div>
+    <div>
+      <button onclick="tinhToan('cong')">Addition(+)</button>
+      <button onclick="tinhToan('tru')">Subtraction(-)</button>
+      <button onclick="tinhToan('nhan')">Multiplication(X)</button>
+      <button onclick="tinhToan('chia')">Division(/)</button>
+    </div>
+    <p id="ketQua"></p>
+  </div>
+</div>
+</body>
+<script>
+  function tinhToan(phepTinh) {
+    let a = +document.getElementById("a").value;
+    let b = +document.getElementById("b").value;
+    if (phepTinh === "cong") {
+      document.getElementById("ketQua").innerHTML = `Kết quả là: ${a + b}`;
+    } else if (phepTinh === "tru") {
+      document.getElementById("ketQua").innerHTML = `Kết quả là: ${a - b}`;
+    } else if (phepTinh === "nhan") {
+      document.getElementById("ketQua").innerHTML = `Kết quả là: ${a * b}`;
+    } else if (phepTinh === "chia" && b !== 0) {
+      document.getElementById("ketQua").innerHTML = `Kết quả là: ${a / b}`;}
+    else {document.getElementById("ketQua").innerHTML = `Lỗi chia cho 0`;}
+  }
+</script>
+</html>
