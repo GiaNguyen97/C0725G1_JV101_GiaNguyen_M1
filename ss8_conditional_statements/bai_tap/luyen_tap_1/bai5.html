@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Xếp loại học lực</h1>
+    <label for="diem_kt">Điểm bài kiểm tra</label>
+    <input id='diem_kt' type="number">
+    <label for='diem_giua_ky'>Điểm thi giữa kỳ</label>
+    <input id='diem_giua_ky' type="number">
+    <label for='diem_cuoi_ky'>Điểm thi cuối kỳ</label>
+    <input id='diem_cuoi_ky' type="number"> <br>
+    <button onclick="xepLoai()">Xếp loại</button>
+    <p id='ket_qua_xep_loai'></p>
+</body>
+<script>
+    function xepLoai() {
+        let diemKT = +document.getElementById('diem_kt').value;
+        let diemGiuaKy = +document.getElementById('diem_giua_ky').value;
+        let diemCuoiKy = +  document.getElementById('diem_cuoi_ky').value;
+        let ketQua = (diemKT + diemCuoiKy * 3 + diemGiuaKy * 6) / 10;
+
+        if (diemKT > 10 || diemGiuaKy > 10 || diemCuoiKy > 10) {
+            document.getElementById('ket_qua_xep_loai').innerHTML = 'Vui lòng nhập thang điểm từ 0 đến 10';
+        } else if (ketQua > 9) {
+            document.getElementById('ket_qua_xep_loai').innerHTML = 'Điểm trung bình là ' +ketQua+'. Học lực xuất sắt';
+        } else if (ketQua > 8) {
+            document.getElementById('ket_qua_xep_loai').innerHTML = 'Điểm trung bình là ' +ketQua+'. Học lực giỏi';
+        } else if (ketQua > 7) {
+            document.getElementById('ket_qua_xep_loai').innerHTML = 'Điểm trung bình là ' +ketQua+'. Học lực khá';
+        } else if (ketQua > 5) {
+            document.getElementById('ket_qua_xep_loai').innerHTML = 'Điểm trung bình là ' +ketQua+'. Học lực trung bình';
+        } else {
+            document.getElementById('ket_qua_xep_loai').innerHTML = 'Điểm trung bình là ' +ketQua+'. Học lực kém';
+        }
+    }
+</script>
+</html>

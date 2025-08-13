@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>You must love me</title>
+    <style>
+        button {
+            margin: 10px
+        }
+
+        #myButton {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div class="center-container">
+    <div class="content">
+        <h1>Do you love me?</h1>
+        <button onclick="yes()">Yes</button>
+        <button id="myButton">No</button>
+    </div>
+</div>
+</body>
+<script>
+    function yes() {
+        alert('Yes. You are right');
+    }
+
+    const button = document.getElementById('myButton');
+    button.addEventListener('mouseenter', no)
+
+    function no() {
+        const newX = Math.random() * window.innerWidth;
+        const newY = Math.random() * window.innerHeight;
+        button.style.left = `${newX}px`;
+        button.style.top = `${newY}px`;
+    };
+</script>
+</html>

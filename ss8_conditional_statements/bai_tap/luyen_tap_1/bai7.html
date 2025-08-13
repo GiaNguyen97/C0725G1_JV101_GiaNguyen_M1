@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tính cước điện thoại</title>
+    <style>
+        div {
+            padding: 5px
+        }
+    </style>
+</head>
+<body>
+<h1>Tính cước điện thoại</h1>
+<div>
+    <label for="nha_mang">Chọn nhà mạng</label>
+    <select id="nha_mang">
+        <option value="Viettel">Viettel</option>
+        <option value="Mobi">Mobifone</option>
+        <option value="Vina">Vinafone</option>
+    </select>
+</div>
+<div>
+    <label for="noi_mang">Số phút nội mạng</label>
+    <input id="noi_mang" type="number">
+</div>
+<div>
+    <label for="ngoai_mang">Số phút ngoại mạng</label>
+    <input id="ngoai_mang" type="number">
+</div>
+<div>
+    <button onclick="tinhGiaCuoc()">Tính giá cước</button>
+    <p id="ket_qua"></p>
+</div>
+</body>
+<script>
+    function tinhGiaCuoc() {
+        let nhaMang = document.getElementById('nha_mang').value;
+        let noiMang = +document.getElementById('noi_mang').value;
+        let ngoaiMang = +document.getElementById('ngoai_mang').value;
+        let giaCuoc;
+        if (nhaMang === 'Viettel') {
+            giaCuoc = noiMang * 690 + ngoaiMang * 1190;
+            const formatted = new Intl.NumberFormat('vi-VN').format(giaCuoc);
+            document.getElementById('ket_qua').innerHTML = 'Giá cước của bạn là ' + formatted + ' đồng.';
+        } else if (nhaMang === 'Mobi') {
+            giaCuoc = noiMang * 880 + ngoaiMang * 990;
+            const formatted = new Intl.NumberFormat('vi-VN').format(giaCuoc);
+            document.getElementById('ket_qua').innerHTML = 'Giá cước của bạn là ' + formatted + ' đồng.';
+        } else { giaCuoc = noiMang * 640 + ngoaiMang * 980;
+            const formatted = new Intl.NumberFormat('vi-VN').format(giaCuoc);
+            document.getElementById('ket_qua').innerHTML = 'Giá cước của bạn là ' + formatted + ' đồng.';
+        }
+    }
+</script>
+</html>

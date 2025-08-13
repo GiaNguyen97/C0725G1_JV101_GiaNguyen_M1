@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div {
+            padding: 5px
+        }
+    </style>
+</head>
+<body>
+<h1>Chuyển đổi nhiệt độ</h1>
+<div>
+    <label for="gia_tri">Nhập số độ bạn muốn đổi</label>
+    <input id="gia_tri" type="number">
+</div>
+<div>
+    <select id="cach_chuyen_doi">
+        <option value="CsangF">Độ C sang độ F</option>
+        <option value="FsangC">Độ F sang độ C</option>
+    </select>
+</div>
+<div>
+    <button onclick="chuyenDoiNhietDo()">Chuyển đổi</button>
+    <p id='ket_qua'></p>
+</div>
+</body>
+<script>
+    function chuyenDoiNhietDo() {
+        let giaTri = +document.getElementById('gia_tri').value;
+        let cachChuyenDoi = document.getElementById('cach_chuyen_doi').value;
+        let ketQua;
+        switch (cachChuyenDoi) {
+            case 'CsangF': {
+                ketQua = giaTri * 9 / 5 + 32;
+                document.getElementById('ket_qua').innerHTML = giaTri + ' độ C bằng ' + ketQua + ' độ F.';
+            }
+                break;
+            case 'FsangC': {
+                ketQua = (giaTri - 32) * 5 / 9;
+                document.getElementById('ket_qua').innerHTML = giaTri + ' độ F bằng ' + ketQua + ' độ C.';
+            }
+                break;
+        }
+    }
+</script>
+</html>

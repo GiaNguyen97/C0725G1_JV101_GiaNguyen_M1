@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+  let a = +prompt('Nhập số tuổi của bạn');
+  if (a>=0 && a<=120 && Number.isInteger(a)) {
+    alert(a+' tuổi là tuổi của một người');
+  } else if ((a>=0 && a<=120) || a<0) {
+    alert('Vui lòng nhập số nguyên dương');
+  } else {
+    alert(a+' tuổi. Bạn hiện tại là người có số tuổi cao nhất thế giới ^.^')
+  }
+</script>
+</html>

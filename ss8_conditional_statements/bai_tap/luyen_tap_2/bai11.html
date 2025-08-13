@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Tính thuế thu nhập cá nhân</h1>
+<div>
+    <label>Nhập số thu nhập cá nhân của bạn (đvt: triệu đồng)</label>
+    <input id="personal_income" type="number">
+</div>
+<div>
+    <button onclick="personalIncome()">Tính thuế thu nhập cá nhân</button>
+    <p id="ket_qua"></p>
+</div>
+</body>
+<script>
+    function personalIncome() {
+        let thuNhapCaNhan = +document.getElementById('personal_income').value;
+        let ketQua;
+        if (thuNhapCaNhan <= 0) {
+            document.getElementById('ket_qua').innerHTML = 'Tháng bạn không có thu nhập à thật là buồn :((';
+        } else if (thuNhapCaNhan > 80) {
+            ketQua = (thuNhapCaNhan * 35 / 100 - 9.85) * 1000000;
+            const formatted = new Intl.NumberFormat('vi-VN').format(ketQua);
+            document.getElementById('ket_qua').innerHTML = 'Số thuế thu nhập cá nhân bạn phải nộp là ' + formatted + ' đồng.';
+        } else if (thuNhapCaNhan > 52) {
+            ketQua = (thuNhapCaNhan * 30 / 100 - 5.85) * 1000000;
+            const formatted = new Intl.NumberFormat('vi-VN').format(ketQua);
+            document.getElementById('ket_qua').innerHTML = 'Số thuế thu nhập cá nhân bạn phải nộp là ' + formatted + ' đồng.';
+        } else if (thuNhapCaNhan > 32) {
+            ketQua = (thuNhapCaNhan * 25 / 100 - 3.25) * 1000000;
+            const formatted = new Intl.NumberFormat('vi-VN').format(ketQua);
+            document.getElementById('ket_qua').innerHTML = 'Số thuế thu nhập cá nhân bạn phải nộp là ' + formatted + ' đồng.';
+        } else if (thuNhapCaNhan > 18) {
+            ketQua = (thuNhapCaNhan * 20 / 100 - 1.65) * 1000000;
+            const formatted = new Intl.NumberFormat('vi-VN').format(ketQua);
+            document.getElementById('ket_qua').innerHTML = 'Số thuế thu nhập cá nhân bạn phải nộp là ' + formatted + ' đồng.';
+        } else if (thuNhapCaNhan > 10) {
+            ketQua = (thuNhapCaNhan * 15 / 100 - 0.75) * 1000000;
+            const formatted = new Intl.NumberFormat('vi-VN').format(ketQua);
+            document.getElementById('ket_qua').innerHTML = 'Số thuế thu nhập cá nhân bạn phải nộp là ' + formatted + ' đồng.';
+        } else if (thuNhapCaNhan > 5) {
+            ketQua = (thuNhapCaNhan * 10 / 100 - 0.25) * 1000000;
+            const formatted = new Intl.NumberFormat('vi-VN').format(ketQua);
+            document.getElementById('ket_qua').innerHTML = 'Số thuế thu nhập cá nhân bạn phải nộp là ' + formatted + ' đồng.';
+        } else if (0 < thuNhapCaNhan < 5) {
+            ketQua = thuNhapCaNhan * 5 / 100 * 1000000;
+            const formatted = new Intl.NumberFormat('vi-VN').format(ketQua);
+            document.getElementById('ket_qua').innerHTML = 'Số thuế thu nhập cá nhân bạn phải nộp là ' + formatted + ' đồng.';
+        }
+    }
+</script>
+</html>

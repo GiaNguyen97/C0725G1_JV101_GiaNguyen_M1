@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div {
+            padding: 5px
+        }
+    </style>
+</head>
+<body>
+<h1>Tính giá cước tiền điện</h1>
+<div>
+    <label>Nhập chữ điện đầu tháng</label>
+    <input id="dien_dau_thang" type="number">
+    <label>Nhập chữ điện cuối tháng</label>
+    <input id="dien_cuoi_thang" type="number">
+</div>
+<div>
+    <button onclick="tinhGiaCuocTienDien()">Tính giá cước tiền điện</button>
+    <p id="so_kwh"></p>
+    <p id="ket_qua"></p>
+</div>
+</body>
+<script>
+    function tinhGiaCuocTienDien() {
+        let dienDauThang = +document.getElementById('dien_dau_thang').value;
+        let dienCuoiThang = +document.getElementById('dien_cuoi_thang').value;
+        let sokWh = dienCuoiThang - dienDauThang;
+        let ketQua;
+        if (sokWh < 0 || Number.isInteger(dienDauThang) === false || Number.isInteger(dienCuoiThang) === false) {
+            document.getElementById('so_kwh').innerHTML = '';
+            document.getElementById('ket_qua').innerHTML = 'Vui nhập lại chữ điện';
+        } else if (sokWh === 0) {
+            document.getElementById('so_kwh').innerHTML = '';
+            document.getElementById('ket_qua').innerHTML = 'Tháng này bạn không xài điện';
+        } else if (sokWh > 400) {
+            ketQua = 50 * 1984 + 50 * 2025 + 100 * 2380 + 100 * 2998 + 100 * 3350 + (sokWh - 400) * 3460;
+            const formatted = new Intl.NumberFormat('vi-VN').format(ketQua);
+            document.getElementById('so_kwh').innerHTML = 'Số kWh điện tháng này của bạn là ' + sokWh;
+            document.getElementById('ket_qua').innerHTML = 'Giá cước tiền điện tháng ngày của bạn là ' + formatted + ' đồng';
+        } else if (sokWh > 300) {
+            ketQua = 50 * 1984 + 50 * 2025 + 100 * 2380 + 100 * 2998 + (sokWh - 300) * 3350;
+            const formatted = new Intl.NumberFormat('vi-VN').format(ketQua);
+            document.getElementById('so_kwh').innerHTML = 'Số kWh điện tháng này của bạn là ' + sokWh;
+            document.getElementById('ket_qua').innerHTML = 'Giá cước tiền điện tháng ngày của bạn là ' + formatted + ' đồng';
+        } else if (sokWh > 200) {
+            ketQua = 50 * 1984 + 50 * 2025 + 100 * 2380 + (sokWh - 200) * 2998;
+            const formatted = new Intl.NumberFormat('vi-VN').format(ketQua);
+            document.getElementById('so_kwh').innerHTML = 'Số kWh điện tháng này của bạn là ' + sokWh;
+            document.getElementById('ket_qua').innerHTML = 'Giá cước tiền điện tháng ngày của bạn là ' + formatted + ' đồng';
+        } else if (sokWh > 100) {
+            ketQua = 50 * 1984 + 50 * 2025 + (sokWh - 100) * 2380;
+            const formatted = new Intl.NumberFormat('vi-VN').format(ketQua);
+            document.getElementById('so_kwh').innerHTML = 'Số kWh điện tháng này của bạn là ' + sokWh;
+            document.getElementById('ket_qua').innerHTML = 'Giá cước tiền điện tháng ngày của bạn là ' + formatted + ' đồng';
+        } else if (sokWh > 50) {
+            ketQua = 50 * 1984 + (sokWh - 50) * 2025;
+            const formatted = new Intl.NumberFormat('vi-VN').format(ketQua);
+            document.getElementById('so_kwh').innerHTML = 'Số kWh điện tháng này của bạn là ' + sokWh;
+            document.getElementById('ket_qua').innerHTML = 'Giá cước tiền điện tháng ngày của bạn là ' + formatted + ' đồng';
+        } else {
+            ketQua = sokWh * 1984;
+            const formatted = new Intl.NumberFormat('vi-VN').format(ketQua);
+            document.getElementById('so_kwh').innerHTML = 'Số kWh điện tháng này của bạn là ' + sokWh;
+            document.getElementById('ket_qua').innerHTML = 'Giá cước tiền điện tháng ngày của bạn là ' + formatted + ' đồng';
+        }
+    }
+</script>
+</html>

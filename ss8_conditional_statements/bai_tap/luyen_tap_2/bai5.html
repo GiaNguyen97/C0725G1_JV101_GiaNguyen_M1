@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div {
+            padding: 5px
+        }
+    </style>
+</head>
+<body>
+<h1>Tính diện tích hình tam giác vuông</h1>
+<div>
+    <label>Nhập độ dài hai cạnh liền kề</label>
+    <input type="number" id="do_dai_canh_1">
+    <input type="number" id="do_dai_canh_2">
+</div>
+<div>
+    <button onclick="areaOfTriangle()">Tính diện tích</button>
+    <p id='ket_qua_1'></p>
+    <p id='ket_qua_2'></p>
+</div>
+</body>
+<script>
+    function areaOfTriangle() {
+        let a = +document.getElementById('do_dai_canh_1').value;
+        let b = +document.getElementById('do_dai_canh_2').value;
+        let h;
+        if (a < 0 || b < 0) {
+            document.getElementById('ket_qua_1').innerHTML = 'Độ dài cạnh phải lớn hơn 0';
+        } else {
+            document.getElementById('ket_qua_1').innerHTML = 'Nếu ' + a + ' và ' + b + ' là 2 cạnh góc vuông thì diện tích hình tam giác bằng: ' + 1 / 2 * b * a;
+            if (a > b) {
+                h = Math.sqrt(a * a - b * b);
+                document.getElementById('ket_qua_2').innerHTML = 'Nếu ' + a + ' và ' + b + ' không phải là 2 cạnh góc vuông thì diện tích hình tam giác bằng: ' + 1 / 2 * b * h;
+            } else if (b > a) {
+                h = Math.sqrt(b * b - a * a);
+                document.getElementById('ket_qua_2').innerHTML = 'Nếu ' + a + ' và ' + b + ' không phải là 2 cạnh góc vuông thì diện tích hình tam giác bằng: ' + 1 / 2 * a * h;
+            } else {
+                document.getElementById('ket_qua_2').innerHTML = 'Tam giác vuông có 2 cạnh bằng nhau là 2 cạnh liền kề góc vuông';
+            }
+        }
+    }
+</script>
+</html>

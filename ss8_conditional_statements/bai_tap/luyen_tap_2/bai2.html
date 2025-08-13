@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div {
+      padding: 5px
+    }
+  </style>
+</head>
+<body>
+<h1>Chuyển đổi chiều dài giữa mét và feet</h1>
+<div>
+  <label for="gia_tri">Nhập số độ dài bạn muốn đổi</label>
+  <input id="gia_tri" type="number">
+</div>
+<div>
+  <select id="cach_chuyen_doi">
+    <option value="MsangF">mét sang độ feet</option>
+    <option value="FsangM">feet sang mét</option>
+  </select>
+</div>
+<div>
+  <button onclick="chuyenDoiDoDaiMetVaFeet()">Chuyển đổi</button>
+  <p id='ket_qua'></p>
+</div>
+</body>
+<script>
+  function chuyenDoiDoDaiMetVaFeet() {
+    let giaTri = +document.getElementById('gia_tri').value;
+    let cachChuyenDoi = document.getElementById('cach_chuyen_doi').value;
+    let ketQua;
+    switch (cachChuyenDoi) {
+      case 'MsangF': {
+        ketQua = giaTri * 3.2808;
+        document.getElementById('ket_qua').innerHTML = giaTri + ' mét bằng ' + ketQua + ' feet.';
+      }
+        break;
+      case 'FsangM': {
+        ketQua = giaTri / 3.2808;
+        document.getElementById('ket_qua').innerHTML = giaTri + ' feet bằng ' + ketQua + ' mét.';
+      }
+        break;
+    }
+  }
+</script>
+</html>

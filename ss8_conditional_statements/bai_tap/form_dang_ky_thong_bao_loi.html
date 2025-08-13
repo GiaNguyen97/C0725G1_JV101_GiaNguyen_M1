@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <style>
+        form {
+            width: 300px;
+            padding: 10px;
+            background-color: lightgray;
+        }
+
+        div {
+            margin-top: 20px;
+            width: 250px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        h2 {
+            margin-left: 110px;
+        }
+
+        p {
+            text-align: center;
+            font-size: 12px;
+            color: red;
+            margin-top: 2px;
+        }
+
+        button {
+            background-color: gray;
+            border: 1px solid yellow;
+            color: white;
+        }
+
+        div span {
+            color: green;
+        }
+
+        #idCross {
+            color: red;
+        }
+
+        #nameCross {
+            color: red;
+        }
+
+        #ageCross {
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+<form>
+    <h2>Đăng ký</h2>
+    <div>
+        <label for="id">ID</label>
+        <input STYLE='margin-left:17px ' id="id" name="id" onblur="checkValidate()"/>
+        <span id="idTick"></span>
+        <span id="idCross"></span>
+    </div>
+    <p id="idError"></p>
+    <div>
+        <label for="name">name</label>
+        <input id="name" name="name" onblur="checkValidate()"/>
+        <span id="nameTick"></span>
+        <span id="nameCross"></span>
+    </div>
+    <p id="nameError"></p>
+    <div>
+        <label for="age">Age</label>
+        <input style="margin-left: 9px" id="age" name="age" onblur="checkValidate()"/>
+        <span id="ageTick"></span>
+        <span id="ageCross"></span>
+    </div>
+    <p id="ageError"></p>
+    <div style="justify-content: center">
+        <button disabled type="submit" id="btn-save">Save</button>
+    </div>
+</form>
+</body>
+<script>
+    function checkValidate() {
+        let theID = document.getElementById('id').value;
+        let theName = document.getElementById('name').value;
+        let theAge = document.getElementById('age').value;
+        let check = true;
+
+        // if (theID !== '' && theName !== '' && theAge !== '') {
+        //     document.getElementById('idTick').innerHTML = 'V';
+        //     document.getElementById('idError').innerHTML = '';
+        //     document.getElementById('nameTick').innerHTML = 'V';
+        //     document.getElementById('nameError').innerHTML = '';
+        //     document.getElementById('ageTick').innerHTML = 'V';
+        //     document.getElementById('ageError').innerHTML = '';
+        //     document.getElementById('btn-save').disabled = false;
+        // } else {
+            if (theID === '') {
+                check = false;
+                document.getElementById('idCross').innerHTML = 'X';
+                document.getElementById('idError').innerHTML = 'Vui lòng nhập ID';
+            } else {
+                document.getElementById('idTick').innerHTML = 'V';
+                document.getElementById('idError').innerHTML = '';
+            }
+            if (theName === '') {
+                check = false;
+                document.getElementById('nameCross').innerHTML = 'X';
+                document.getElementById('nameError').innerHTML = 'Vui lòng nhập tên';
+            } else {
+
+                document.getElementById('nameTick').innerHTML = 'V';
+                document.getElementById('nameError').innerHTML = '';
+            }
+            if (theAge === '') {
+                check = false;
+                document.getElementById('ageCross').innerHTML = 'X';
+                document.getElementById('ageError').innerHTML = 'Vui lòng nhập tuổi';
+            } else {
+
+                document.getElementById('ageTick').innerHTML = 'V';
+                document.getElementById('ageError').innerHTML = '';
+            }
+        if (check) {
+            document.getElementById('btn-save').disabled = false;
+        }
+    }
+</script>
+</html>

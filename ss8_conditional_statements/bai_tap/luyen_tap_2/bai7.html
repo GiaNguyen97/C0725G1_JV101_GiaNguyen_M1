@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Giải phương trình bậc 2</h1>
+<div>
+    <label>Nhập phương trình</label>
+    <input id="a" type="number">
+    <label> * X<sup>2</sup> + </label>
+    <input id="b" type="number">
+    <label>* X + </label>
+    <input id="c" type="number">
+    <label> = 0</label>
+</div>
+<div>
+    <button onclick="giaiPhuongTrinhBac2()">Tìm X</button>
+    <p id="ket_qua"></p>
+</div>
+</body>
+<script>
+    function giaiPhuongTrinhBac2() {
+        let a = +document.getElementById('a').value;
+        let b = +document.getElementById('b').value;
+        let c = +document.getElementById('c').value;
+        let delta = b * b - 4 * a * c;
+        let sprtDelta = Math.sqrt(delta);
+        if (delta < 0) {
+            document.getElementById('ket_qua').innerHTML = 'Phương trình trên vô nghiệm';
+        } else if (delta === 0) {
+            document.getElementById('ket_qua').innerHTML = 'Phương trình trên có nghiệm kép là x = ' + -b / 2 * a;
+        } else {
+            document.getElementById('ket_qua').innerHTML = 'Nghiệm của phương trình bậc 2 trên là x1 = ' + (-b + sprtDelta) / 2 * a + ', x2 = ' + (-b - sprtDelta) / 2 * a;
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Hoa hồng tháng 8 năm 2025</h1>
+<label for="doanh_thu">Nhập doanh thu bán hàng tháng 8 (đvt: triệu đồng)</label>
+<input id="doanh_thu" type="number">
+<button onclick="tinhHoaHong()">Tính hoa hồng</button>
+<p id="ket_qua"></p>
+</body>
+<script>
+    function tinhHoaHong() {
+        let doanhThu = +document.getElementById('doanh_thu').value;
+        let hoaHong;
+        if (doanhThu > 100) {
+            hoaHong = doanhThu * 7000000 / 100;
+            const formatted = new Intl.NumberFormat('vi-VN').format(hoaHong);
+            document.getElementById('ket_qua').textContent = 'Số tiền hoa hồng tháng 8 bạn nhận được là ' + formatted + ' đồng';
+        } else if (doanhThu > 50) {
+            hoaHong = doanhThu * 5000000 / 100;
+            const formatted = new Intl.NumberFormat('vi-VN').format(hoaHong);
+            document.getElementById('ket_qua').innerHTML = 'Số tiền hoa hồng tháng 8 bạn nhận được là ' + formatted + ' đồng';
+        } else {
+            hoaHong = doanhThu * 3000000 / 100;
+            const formatted = new Intl.NumberFormat('vi-VN').format(hoaHong);
+            document.getElementById('ket_qua').innerHTML = 'Số tiền hoa hồng tháng 8 bạn nhận được là ' + formatted + ' đồng';
+        }
+    }
+</script>
+</html>
