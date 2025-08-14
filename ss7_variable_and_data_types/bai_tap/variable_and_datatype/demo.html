@@ -1,72 +1,22 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Vẽ Tam Giác</title>
-    <style>
-        canvas {
-            border: 1px solid #000;
-            margin-top: 10px;
-        }
-    </style>
+    <title>Trung bình ba môn</title>
 </head>
 <body>
-<h2>Vẽ Hình Tam Giác từ 3 Cạnh</h2>
-
-<label>Cạnh a: <input type="number" id="a" /></label><br/>
-<label>Cạnh b: <input type="number" id="b" /></label><br/>
-<label>Cạnh c: <input type="number" id="c" /></label><br/>
-<button onclick="veTamGiac()">Vẽ Tam Giác</button>
-
-<canvas id="canvas" width="400" height="400"></canvas>
-
-<script>
-    function veTamGiac() {
-        const a = parseFloat(document.getElementById('a').value);
-        const b = parseFloat(document.getElementById('b').value);
-        const c = parseFloat(document.getElementById('c').value);
-
-        const ctx = document.getElementById('canvas').getContext('2d');
-        ctx.clearRect(0, 0, 400, 400); // Xóa canvas
-
-        // Kiểm tra điều kiện tam giác
-        if (a + b <= c || a + c <= b || b + c <= a) {
-            alert("Không tạo thành tam giác hợp lệ!");
-            return;
-        }
-
-        // Đặt điểm A tại (0, 0), điểm B tại (c, 0)
-        const A = {x: 0, y: 0};
-        const B = {x: c, y: 0};
-
-        // Tính tọa độ điểm C bằng định lý cosin
-        const cosC = (a*a + b*b - c*c) / (2*a*b); // sai công thức
-        const xC = (a*a + c*c - b*b) / (2*c);
-        const yC = Math.sqrt(a*a - xC*xC);
-        const C = {x: xC, y: -yC};
-
-        // Dịch tam giác vào giữa canvas
-        const offsetX = 100;
-        const offsetY = 250;
-
-        // Vẽ tam giác
-        ctx.beginPath();
-        ctx.moveTo(A.x + offsetX, A.y + offsetY);
-        ctx.lineTo(B.x + offsetX, B.y + offsetY);
-        ctx.lineTo(C.x + offsetX, C.y + offsetY);
-        ctx.closePath();
-
-        ctx.strokeStyle = 'blue';
-        ctx.lineWidth = 2;
-        ctx.stroke();
-
-        // Vẽ nhãn điểm
-        ctx.fillStyle = 'red';
-        ctx.font = '16px Arial';
-        ctx.fillText("A", A.x + offsetX - 10, A.y + offsetY);
-        ctx.fillText("B", B.x + offsetX + 5, B.y + offsetY);
-        ctx.fillText("C", C.x + offsetX, C.y + offsetY - 10);
-    }
-</script>
 </body>
+<script>
+    let html = "<table border='1' cellspacing='0' cellpadding='5'><tr>";
+    for (let i = 2; i <= 9; i++) {
+    html += "<td border ='1'>";
+        for (let j = 1; j <= 9; j++) {
+        html += `${i} x ${j} = ${i * j}<br>`;
+        }
+        html += "</td>";
+    }
+    html += "</tr></table>";
+
+document.body.innerHTML = html;
+</script>
 </html>

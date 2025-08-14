@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bảng cửu chương</title>
+    <style>
+        .center-container {
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        tr, td {
+            border: 2px solid black;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="center-container">
+    <div class='content'>
+        <h1>Bảng cửu chương</h1>
+        <table>
+            <script>
+                for (let i = 1; i < 10; i++) {
+                    document.write('<tr>');
+                    for (let j = 2; j < 10; j++) {
+                        document.write(`<td>${j} x ${i} = ${i * j} </td>`);
+                    }
+                    document.write('</tr>');
+                }
+            </script>
+        </table>
+    </div>
+</div>
+</body>
+</html>
