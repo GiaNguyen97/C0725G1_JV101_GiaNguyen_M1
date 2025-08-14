@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let n;
+    do {
+        n = +prompt('Nhập n');
+        if (n <= 0 || Number.isInteger(n) === false) {
+            alert('Vui lòng nhập lại!');
+        } else {
+            break;
+        }
+    } while (true);
+    checkDaySoFibonacciChia5(n);
+
+    function checkDaySoFibonacciChia5(n) {
+        let i = 0;
+        let j = 1;
+        let x;
+        let dem = 0;
+        while (dem<n) {
+            x = i + j;
+            if (x%5===0) {
+                dem++;
+                document.write('Số thứ '+dem+' trong dãy Fibonacci chia hết cho 5 là: '+x+'<br>');
+            }
+            i = j;
+            j = x;
+        }
+    }
+</script>
+</body>
+</html>

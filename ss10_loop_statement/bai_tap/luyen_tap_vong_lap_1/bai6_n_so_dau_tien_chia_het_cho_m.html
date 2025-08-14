@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    let n;
+    do {
+        n = +prompt('Nhập n (n số đầu tiên chia hết cho m)');
+    } while (n <= 0 || Number.isInteger(n) === false);
+    let m;
+    do {
+        m = +prompt('Nhập m');
+    } while (Number.isInteger(m) === false);
+    daySoChiaHetChoSoBatKy(n,m);
+    function daySoChiaHetChoSoBatKy(n,m) {
+        let dem=0;
+        let i =1;
+        let sum = 0;
+        while (dem<n) {
+            if (i%m===0) {
+                dem++;
+                document.write('Số thứ '+dem+' trong dãy số tự nhiên chia hết cho '+m+' là '+i+'<br>');
+                sum +=i;
+            }
+            i++;
+        }
+        document.write('<br>Tổng '+n+' số tự nhiêu đầu tiên chia hết cho '+m+' là '+sum);
+    }
+</script>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .center-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="center-container">
+    <div class="content">
+        <h1>Game đoán số</h1>
+        <button onclick="gameDoanSo()">Bắt đầu</button>
+    </div>
+</div>
+
+</body>
+<script>
+    function gameDoanSo() {
+        let khoangRandom = +prompt('Số bạn muốn đoán trong khoảng lớn nhất là bao nhiêu');
+        let n;
+        let i;
+        let dapAn = Math.floor(Math.random() * khoangRandom)
+        for (i = 1; i <= 3; i++) {
+            n = +prompt('Nhập số bạn đoán');
+            if (n === dapAn) {
+                document.write('Chúc mừng bạn đã đoán đúng đáp án là ' + dapAn);
+                break;
+            } else if (n < dapAn) {
+                alert('Số bạn nhập bé hơn đáp án');
+            } else {
+                alert('Số bạn nhập lơn hơn đáp án');
+            }
+        }
+        if (i > 3) {
+            document.write('Bạn đã hết lượt. Đáp án là ' + dapAn);
+        }
+
+    }
+</script>
+</html>

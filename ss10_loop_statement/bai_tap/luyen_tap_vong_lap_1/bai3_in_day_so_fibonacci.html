@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let n;
+    do {
+        n = +prompt('Nhập n');
+        if (n <= 0 || Number.isInteger(n) === false) {
+            alert('Vui lòng nhập lại!');
+        } else {
+            break;
+        }
+    } while (true);
+    inDaySoFibonacci(n);
+    function inDaySoFibonacci(m) {
+        let i=0;
+        let j=1;
+        let x;
+        document.write('<h1>Dãy Fibonacci</h1>')
+        if (m<2) {
+            document.write('Số 01: '+i+'<br>');
+            return;
+        } else if (m<3) {
+            document.write('Số 01: '+i+'<br>');
+            document.write('Số 02: '+j+'<br>');
+            return;
+        } else {
+            document.write('Số 01: '+i+'<br>');
+            document.write('Số 02: '+j+'<br>');
+            for (let dem=3;dem<=m;dem++){
+                x=i+j;
+                if (dem<10) {
+                    document.write('Số 0'+dem+': '+x+'<br>');
+                } else {
+                    document.write('Số '+dem+': '+x+'<br>');
+                }
+                i=j;
+                j=x;
+            }
+        }
+    }
+</script>
+</body>
+</html>

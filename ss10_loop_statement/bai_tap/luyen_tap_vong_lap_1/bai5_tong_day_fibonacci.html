@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let n;
+    do {
+        n = +prompt('Nhập n');
+        if (n <= 0 || Number.isInteger(n) === false) {
+            alert('Vui lòng nhập lại!');
+        } else {
+            break;
+        }
+    } while (true);
+    tongDaySoFibonacci(n);
+
+    function tongDaySoFibonacci(m) {
+        let i = 0;
+        let j = 1;
+        let x;
+        let sum;
+        if (m < 2) {
+            sum = i;
+        } else if (m < 3) {
+            sum = i + j;
+        } else {
+            sum = i + j;
+            for (let dem = 3; dem <= m; dem++) {
+                x = i + j;
+                sum += x;
+                i = j;
+                j = x;
+            }
+        }
+        document.write('Tổng của ' + m + ' số Fibonacci đầu tiên là ' + sum);
+    }
+</script>
+</body>
+</html>
