@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button onclick="hienThiThucDon()">Menu</button>
+</body>
+<script>
+    function hienThiThucDon() {
+        let n;
+        let danhSach = '';
+        let caPhe = 0, caCao = 0, nuocCam = 0, soThuTu = 0;
+        let tongTien = 0;
+        do {
+            n = +prompt('----------Menu----------\n' +
+                'Hãy nhập số để chọn đồ uống\n' +
+                '1. Cafe:            10k\n' +
+                '2. Ca cao:        15k\n' +
+                '3. Nước cam:   20k\n' +
+                '4. Kết thúc\n' +
+                '---------Danh sách đã chọn----------\n' +
+                danhSach + '\n' + '$ Tổng tiển :' + tongTien + ' k');
+            switch (n) {
+                case 1: {
+                    if (caPhe === 0) {
+                        caPhe++;
+                        soThuTu++;
+                        danhSach += soThuTu + '. Cafe\n';
+                        tongTien += 10;
+                    } else {
+                        tongTien += 10;
+                        caPhe++;
+                    }
+                    break;
+                }
+                case 2: {
+                    if (caCao === 0) {
+                        caCao++;
+                        soThuTu++;
+                        danhSach += soThuTu + '. Ca Cao\n';
+                        tongTien += 15;
+                    } else {
+                        tongTien += 15;
+                        caCao++;
+                    }
+                    break;
+                }
+                case 3: {
+                    if (nuocCam === 0) {
+                        nuocCam++;
+                        soThuTu++;
+                        danhSach += soThuTu + '. Nước cam\n';
+                        tongTien += 20;
+                    } else {
+                        tongTien += 20;
+                        nuocCam++;
+                    }
+                    break;
+                }
+            }
+            if (n === 4) {
+                break;
+            }
+        } while (true);
+        alert('---------Danh sách đã chọn----------\n' +
+            '1. Cà phê        ' + caPhe + ' lần\n' +
+            '2. Ca Cao        ' + caCao + ' lần\n' +
+            '3. Nước cam     ' + nuocCam + ' lần\n' +
+            '$ Tổng tiển : ' + tongTien + ' k');
+
+    }
+</script>
+</html>
