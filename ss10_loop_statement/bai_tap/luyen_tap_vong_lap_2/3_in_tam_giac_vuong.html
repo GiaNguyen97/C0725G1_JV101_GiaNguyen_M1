@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    let n;
+    let i;
+    do {
+        n = +prompt('Nhập n');
+        if (n <= 0 || Number.isInteger(n) === false) {
+            alert('Vui lòng nhập lại!');
+        } else {
+            break;
+        }
+    } while (true);
+    for (i = 1; i <= n; i++) {
+        for (let j = 1; j <= i; j++) {
+           document.write('*');
+        }
+        document.write('<br>');
+    }
+    document.write('<br>');
+    for (i = n; i >= 1; i--) {
+        for (let j = i; j >= 1; j--) {
+            document.write('*');
+        }
+        document.write('<br>');
+    }
+    document.write('<br>');
+    for (i = 1; i <= n; i++) {
+        for (let x = n-i; x>=1;x--) {
+            inTamGiac +='\u0020';
+        }
+        for (let j = 1; j <= i; j++) {
+            inTamGiac += '*';
+        }
+        inTamGiac += '<br>';
+    }
+    inTamGiac += '<br>';
+    for (i = n; i >= 1; i--) {
+        for (let x = 1; x<=n-1;x++) {
+            inTamGiac +=' ';
+        }
+        for (let j = i; j >= 1; j--) {
+            inTamGiac += '*';
+        }
+        inTamGiac += '<br>';
+    }
+</script>
+</html>

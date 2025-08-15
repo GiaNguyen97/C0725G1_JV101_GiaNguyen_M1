@@ -3,35 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .center-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-<button onclick="hienThiThucDon()">Menu</button>
+<div class="center-container">
+    <div class="content">
+        <button onclick="hienThiThucDon()">Menu</button>
+    </div>
+</div>
 </body>
 <script>
     function hienThiThucDon() {
         let n;
         let danhSach = '';
-        let caPhe = 0, caCao = 0, nuocCam = 0, soThuTu = 0;
-        let tongTien = 0;
+        let caPhe = 0, caCao = 0, nuocCam = 0, soThuTu = 0, tongTien =0;
         do {
-            n = +prompt('----------Menu----------\n' +
+            n = +prompt('--------------Menu--------------\n' +
                 'Hãy nhập số để chọn đồ uống\n' +
                 '1. Cafe:            10k\n' +
                 '2. Ca cao:        15k\n' +
                 '3. Nước cam:   20k\n' +
                 '4. Kết thúc\n' +
-                '---------Danh sách đã chọn----------\n' +
-                danhSach + '\n' + '$ Tổng tiển :' + tongTien + ' k');
+                '-------Danh sách đã chọn-------\n' +
+                danhSach + '                        $ Tổng tiển : ' + tongTien + ' k');
             switch (n) {
                 case 1: {
                     if (caPhe === 0) {
                         caPhe++;
                         soThuTu++;
-                        danhSach += soThuTu + '. Cafe\n';
+                        danhSach += soThuTu + '. Cafe            x'+caPhe+'\n';
                         tongTien += 10;
                     } else {
-                        tongTien += 10;
                         caPhe++;
+                        danhSach = danhSach.replace('. Cafe            x'+(caPhe-1),'. Cafe   gi         x'+caPhe);
+                        tongTien += 10;
                     }
                     break;
                 }
@@ -39,11 +54,12 @@
                     if (caCao === 0) {
                         caCao++;
                         soThuTu++;
-                        danhSach += soThuTu + '. Ca Cao\n';
+                        danhSach += soThuTu + '. Ca Cao        x'+caCao+'\n';
                         tongTien += 15;
                     } else {
                         tongTien += 15;
                         caCao++;
+                        danhSach = danhSach.replace('. Ca Cao        x'+(caCao-1),'. Ca Cao        x'+caCao);
                     }
                     break;
                 }
@@ -51,11 +67,12 @@
                     if (nuocCam === 0) {
                         nuocCam++;
                         soThuTu++;
-                        danhSach += soThuTu + '. Nước cam\n';
+                        danhSach += soThuTu + '. Nước cam   x'+nuocCam+'\n';
                         tongTien += 20;
                     } else {
                         tongTien += 20;
                         nuocCam++;
+                        danhSach = danhSach.replace('. Nước cam   x'+(nuocCam-1),'. Nước cam   x'+nuocCam);
                     }
                     break;
                 }
@@ -65,10 +82,9 @@
             }
         } while (true);
         alert('---------Danh sách đã chọn----------\n' +
-            '1. Cà phê        ' + caPhe + ' lần\n' +
-            '2. Ca Cao        ' + caCao + ' lần\n' +
-            '3. Nước cam     ' + nuocCam + ' lần\n' +
-            '$ Tổng tiển : ' + tongTien + ' k');
+            danhSach+
+            '----------------------------------------\n' +
+            '                               $ Tổng tiển : ' + tongTien + ' k');
 
     }
 </script>

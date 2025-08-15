@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let n;
+    let i;
+    let sum = 1;
+    do {
+        n = +prompt('Nhập n');
+        if (n <= 0 || Number.isInteger(n) === false) {
+            alert('Vui lòng nhập lại!');
+        } else {
+            break;
+        }
+    } while (true);
+    for (i = 1; i <= n; i++) {
+        sum *= i;
+    }
+    alert(`${i - 1}! là : ${sum}`);
+</script>
+</body>
+</html>
