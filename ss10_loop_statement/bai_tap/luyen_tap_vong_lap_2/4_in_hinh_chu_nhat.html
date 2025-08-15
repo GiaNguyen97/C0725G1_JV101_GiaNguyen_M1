@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    let n, m;
+    do {
+        n = +prompt('Nhập chiều dài');
+        m = +prompt('Nhập chiều rộng');
+        if (n <= 0 || Number.isInteger(n) === false || m <= 0 || Number.isInteger(m) === false) {
+            alert('Vui lòng nhập lại!');
+        } else {
+            break;
+        }
+    } while (true);
+    for (let i = 1; i <= m; i++) {
+        if (i === 1 || i === m) {
+            for (let j = 1; j <= n; j++) {
+                document.write('*' + '\u00A0');
+            }
+            document.write('<br>');
+        } else {
+            document.write('*' + '\u00A0');
+            for (let j = 2; j < n; j++) {
+                document.write('\u00A0\u00A0\u00A0');
+            }
+            document.write('*');
+            document.write('<br>');
+        }
+    }
+</script>
+</html>

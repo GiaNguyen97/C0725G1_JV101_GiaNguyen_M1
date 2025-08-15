@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tính lãi suất ngân hàng</title>
+    <style>
+        div {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<h1>Tính lãi suất ngân hàng (lãi kép)</h1>
+<div>
+    <label for='so_tien'>Nhập số tiền bạn muốn gửi (đvt: triệu đồng)</label>
+    <input id='so_tien' type="number">
+</div>
+<div>
+    <label for='so_thang'>Nhập tháng bạn muốn gửi</label>
+    <input id='so_thang' type="number">
+</div>
+<div>
+    <label for='lai_suat'>Nhập lãi suất ngân hàng (%)</label>
+    <input id='lai_suat' type="number">
+</div>
+<div>
+    <button onclick="tinhLaiSuatNganHang()">Tính số tiền nhận được</button>
+    <p id="ket_qua"></p>
+
+</div>
+</body>
+<script>
+    function tinhLaiSuatNganHang() {
+        let soTien = +document.getElementById('so_tien').value;
+        let soThang = +document.getElementById('so_thang').value;
+        let laiSuat = +(document.getElementById('lai_suat').value / 100);
+        let tienLai = 0, tienTong = soTien;
+        for (let i = 1; i <= soThang; i++) {
+            tienLai = tienTong * laiSuat;
+            tienTong += tienLai;
+        }
+        const formatted1 = new Intl.NumberFormat('vi-VN').format(Math.floor((tienTong - soTien)*1000000));
+        const formatted2 = new Intl.NumberFormat('vi-VN').format(Math.floor(tienTong*1000000));
+        document.getElementById('ket_qua').innerHTML =
+            `Số tiền bạn nhận được là ${formatted2} đồng<br><br>Số tiền lãi bạn nhận được là ${formatted1} đồng`;
+    }
+</script>
+</html>
