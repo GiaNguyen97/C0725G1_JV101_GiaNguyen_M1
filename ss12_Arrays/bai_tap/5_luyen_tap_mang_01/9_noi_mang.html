@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Nối mảng</h1>
+<button onclick="btnAdd1()">Tạo mảng a</button>
+<button onclick="btnAdd2()">Tạo mảng b</button>
+<button onclick="btnDislay()">Nối b và a</button>
+<p id="dislay_array_a"></p>
+<p id="dislay_array_b"></p>
+<p id='result'></p>
+</body>
+<script>
+    let arrayA = [];
+    let arrayB = [];
+    let arrayC = new Array(20);
+
+    function btnAdd1() {
+        for (let i = 0; i < 10; i++) {
+            arrayA[i] = Math.floor(Math.random() * 200) - 100;
+        }
+        document.getElementById('dislay_array_a').innerHTML = 'Mảng a đã tạo là [' + arrayA + ']';
+        document.getElementById('result').innerHTML = '';
+    }
+
+    function btnAdd2() {
+        for (let i = 0; i < 10; i++) {
+            arrayB[i] = Math.floor(Math.random() * 200) - 100;
+        }
+        document.getElementById('dislay_array_b').innerHTML = 'Mảng b đã tạo là [' + arrayB + ']';
+        document.getElementById('result').innerHTML = '';
+    }
+
+    function btnDislay() {
+        arrayC = arrayB.concat(arrayA);
+        document.getElementById('result').innerHTML = 'Mảng sau khi nối là [' + arrayC + ']';
+    }
+</script>
+</html>

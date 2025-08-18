@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Từ điển</title>
+</head>
+<body>
+<h1>Từ điển Anh - Việt (Dictionary English - Vietnamese)</h1>
+<label for="tu_tieng_anh">Nhập từ tiếng anh bạn muốn tra</label>
+<input id="tu_tieng_anh" type="text">
+<button onclick="traTuDien()">Tra từ điển</button>
+<p id = 'result'></p>
+</body>
+<script>
+  let tiengAnh = ['variable','pseudo-code','flowchart','datatype','operator','clone','html','vcs','control statement','conditional statement','loop statement','condition'];
+  let tiengViet = ['biến','mã giả','lưu đồ','kiểu dữ liệu','toán tử','bản sao','Hypertext Makup Language là ngôn ngữ đánh dấu siêu văn bản','Version Control System là hệ thống điều khiển phiên bản mã nguồn','câu lệnh điều khiển','câu lệnh điều kiện','câu lệnh lặp','biểu thức điều kiện'];
+  function traTuDien() {
+    let tuTra = document.getElementById('tu_tieng_anh').value;
+    if (tiengAnh.includes(tuTra.toLowerCase())) {
+      document.getElementById('result').innerHTML = tuTra + ' nghĩa là ' + tiengViet[tiengAnh.indexOf(tuTra.toLowerCase())];
+    } else {
+      document.getElementById('result').innerHTML = 'Từ bạn nhập chưa có trong từ điển của chúng tôi. Xin lỗi vì hạn chế này :(('
+    }
+  }
+</script>
+</html>
