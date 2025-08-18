@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<label>Nhập 1 chuỗi (không dấu) </label>
+<input id="chuoi" type="text">
+<button onclick="chuyenChuThuongThanhHoaVaNguocLai()">Chuyển đổi</button>
+<p id='result'></p>
+</body>
+<script>
+    function chuyenChuThuongThanhHoaVaNguocLai() {
+        let chuoi = document.getElementById('chuoi').value;
+        let array = Array.from(chuoi);
+        // const chuThuong = 'qwertyuiopasdfghjklzxcvbnm';
+        // const chuHoa = 'QWERTYUIOPASDFGHJKLZXCVBNM';
+        for (let i = 0; i < array.length; i++) {
+            if (isLowerCase(array[i])) {
+                array[i] = array[i].toUpperCase();
+            } else if (isUpperCase(array[i])) {
+                array[i] = array[i].toLowerCase();
+            }
+        }
+        document.getElementById('result').innerHTML = array.join('');
+    }
+
+    function isLowerCase(str) {
+        return str === str.toLowerCase();
+    }
+
+    function isUpperCase(str) {
+        return str === str.toUpperCase();
+    }
+</script>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Kiểm tra số nguyên lớn hơn 10</h1>
+<button onclick="btnAdd()">Tạo mảng</button>
+<button onclick="btnDislay()">Hiển thị</button>
+<p id="dislay_array"></p>
+<p id='result'></p>
+</body>
+<script>
+    let array = [];
+
+    function btnAdd() {
+        for (let i=0;i<10;i++) {
+            array[i] = Math.floor(Math.random()*40)-20;
+        }
+        document.getElementById('dislay_array').innerHTML = 'Mảng đã tạo là ['+array+']';
+        document.getElementById('result').innerHTML='';
+    }
+
+    function btnDislay() {
+        let lonHon10 = '';
+        for (let i=0;i<array.length;i++) {
+            if (array[i]>=10) {
+                lonHon10 += array[i] + ', ';
+            }
+        }
+        lonHon10 = lonHon10.slice(0,-2);
+        document.getElementById('result').innerHTML='Các số nguyên lớn hơn 10 là: '+lonHon10;
+    }
+
+</script>
+</html>

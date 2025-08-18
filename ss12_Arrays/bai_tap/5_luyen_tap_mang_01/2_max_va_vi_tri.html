@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Kiểm tra số nguyên lớn nhất và vị trí</h1>
+<button onclick="btnAdd()">Tạo mảng</button>
+<button onclick="btnDislay()">Hiển thị</button>
+<p id="dislay_array"></p>
+<p id='result'></p>
+</body>
+<script>
+    let array = [];
+
+    function btnAdd() {
+        for (let i = 0; i < 10; i++) {
+            array[i] = Math.floor(Math.random() * 200)-100;
+        }
+        document.getElementById('dislay_array').innerHTML = 'Mảng đã tạo là [' + array + ']';
+        document.getElementById('result').innerHTML = '';
+    }
+
+    function btnDislay() {
+        let soMax = array[0];
+        for (let i = 1; i < array.length; i++) {
+            if (soMax < array[i]) {
+                soMax = array[i];
+            }
+        }
+        let viTri = array.indexOf(soMax)+1;
+        document.getElementById('result').innerHTML = 'Số lớn nhất trong mảng là: ' + soMax + ' ở vị trí thứ ' + viTri + ' trong mảng';
+    }
+
+</script>
+</html>

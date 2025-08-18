@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<h1>Tìm 1 số có trong mảng không?</h1>
+<div>
+    <label for="so_phan_tu">Nhập số phẩn tử của mảng</label>
+    <input id='so_phan_tu' type="number">
+    <button onclick="btnAdd1()">Nhập phần tử</button>
+    <button onclick="btnAdd2()">Tạo mảng</button>
+</div>
+<div>
+    <label for="so_bat_ky">Nhập số n </label>
+    <input style="margin-left: 108px" id='so_bat_ky' type="number">
+    <button onclick="btnDislay()">Hiển thị</button>
+</div>
+<p id="dislay_array"></p>
+<p id='result1'></p>
+</body>
+<script>
+    let array;
+
+    function btnAdd1() {
+        array = [];
+        let n = +document.getElementById('so_phan_tu').value;
+        for (let i = 0; i < n; i++) {
+            array[i] = prompt(`Nhập phần tử thứ ${i + 1}`);
+        }
+        document.getElementById('dislay_array').innerHTML = 'Mảng đã tạo là [' + array + ']';
+        document.getElementById('result1').innerHTML = '';
+    }
+
+    function btnAdd2() {
+        array = [];
+        let n = +document.getElementById('so_phan_tu').value;
+        for (let i = 0; i < n; i++) {
+            array[i] = Math.floor(Math.random() * 200) - 100;
+        }
+        document.getElementById('dislay_array').innerHTML = 'Mảng đã tạo : [' + array + ']';
+        document.getElementById('result1').innerHTML = '';
+    }
+
+    function btnDislay() {
+        let n = +document.getElementById('so_bat_ky').value;
+        if (array.includes(n)) {
+            document.getElementById('result1').innerHTML = `Số ${n} có trong mảng và ở trị trí thứ  ${array.indexOf(n)+1}`;
+        } else {
+            document.getElementById('result1').innerHTML = 'Số ' + n + ' không có trong mảng';
+        }
+    }
+</script>
+</html>

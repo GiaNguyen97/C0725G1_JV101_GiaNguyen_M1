@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Tạo và thêm '-' vào 2 số chẵn liên tiếp</h1>
+<label>Nhập nguyên dương số bất kỳ</label>
+<input id="array" type="number">
+<button onclick="btnAdd()">Thêm phẩn tử</button>
+<button onclick="btnDislay()">Thêm '-' và hiên thị</button>
+<p id='result'></p>
+</body>
+<script>
+    let array = [];
+
+    function btnAdd() {
+        let a = +document.getElementById('array').value;
+        //array.push(a);
+        array[array.length] = a;
+        alert('Đã thêm ' + a + ' vào mảng');
+        document.getElementById('array').value = '';
+    }
+
+    function btnDislay() {
+        for (let i = 0; i < array.length; i++) {
+            if (array[i] % 2 === 0 && array[i - 1] % 2 === 0) {
+                array.splice(i, 0, " - ");
+            }
+        }
+        document.getElementById('result').innerHTML = array.join('');
+    }
+</script>
+</html>

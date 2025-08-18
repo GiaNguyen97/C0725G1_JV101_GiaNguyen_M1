@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Tạo và nối phần tử mảng thành chuỗi</h1>
+    <input id="array" type="text">
+    <button onclick="btnAdd()">Thêm phẩn tử</button>
+    <button onclick="btnDislay()">Nối mảng và hiên thị</button>
+    <p id ='result'></p>
+</body>
+    <script>
+      let array = [];
+      function btnAdd() {
+        let a = document.getElementById('array').value;
+        //array.push(a);
+        array[array.length] = a;
+        alert('Đã thêm '+ a + ' vào mảng');
+        document.getElementById('array').value ='';
+      }
+      function btnDislay() {
+        document.getElementById('result').innerHTML = array.join(' ');
+      }
+
+    </script>
+</html>
