@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Type anthing slowly</h1>
+<input onkeydown="textFake()" style="width: 300px;height: 40px" id="result" type="text">
+
+</body>
+<script>
+    let textarea = 'Bạn đừng cố đánh nữa!!!';
+    let dem = 0;
+    let ketQua = '';
+
+    function textFake() {
+        event.preventDefault();
+        if (dem < textarea.length) {
+            ketQua += textarea[dem];
+            dem++;
+        }
+        document.getElementById('result').value= ketQua;
+    }
+</script>
+</html>
