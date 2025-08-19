@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<label>Nhập 2 chuỗi</label>
+<input style="width: 200px; height: 30px;" id="chuoi1" type="text">
+<input style="width: 200px; height: 30px;" id="chuoi2" type="text">
+<button onclick="kiemTraChuoiGiongNhau()">Kiểm tra</button>
+<p id='result'></p>
+</body>
+<script>
+  function kiemTraChuoiGiongNhau() {
+    let chuoi1 = document.getElementById('chuoi1').value;
+    let chuoi2 = document.getElementById('chuoi2').value;
+    let array1 = Array.from(chuoi1.replace(/\s/g,''));
+    let array2 = Array.from(chuoi2.replace(/\s/g,''));
+    chuoi1 = array1.sort().join('');
+    chuoi2 = array2.sort().join('');
+    if (chuoi1==chuoi2) {
+      document.getElementById('result').innerHTML = 'Hai chuỗi trên giống nhau';
+    } else {
+      document.getElementById('result').innerHTML = 'Hai chuỗi trên khác nhau';    }
+
+  }
+</script>
+</html>

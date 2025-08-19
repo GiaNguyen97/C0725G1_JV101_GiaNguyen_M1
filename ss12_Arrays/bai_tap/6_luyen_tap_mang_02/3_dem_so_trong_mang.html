@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<label>Nhập 1 chuỗi </label>
+<input id="chuoi" type="text">
+<button onclick="demSoTrongChuoi()">Đếm số trong chuỗi</button>
+<p id='result'></p>
+</body>
+<script>
+    function demSoTrongChuoi() {
+        let mangSo = ['0','1','2','2','3','4','5','6','7','8','9'];
+        let demSo = 0;
+        let daySo = '';
+        let chuoi = document.getElementById('chuoi').value;
+        let array = Array.from(chuoi);
+        for (let i = 0; i < array.length; i++) {
+            if (mangSo.includes(array[i])){
+                demSo++;
+                daySo += array[i] + ', ';
+            }
+        }
+        daySo = daySo.slice(0,-2);
+        document.getElementById('result').innerHTML = `Có ${demSo} ký tự số trong mảng là ${daySo}`;
+    }
+</script>
+</html>

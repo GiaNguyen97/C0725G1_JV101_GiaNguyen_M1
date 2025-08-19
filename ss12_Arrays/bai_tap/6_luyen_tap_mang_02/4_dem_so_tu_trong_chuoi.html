@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<label>Nhập 1 đoạn văn</label>
+<input style="width: 200px; height: 100px;" id="chuoi" type="text">
+<button onclick="demSoTrongChuoi()">Đếm từ trong đoạn văn</button>
+<p id='result'></p>
+</body>
+<script>
+  function demSoTrongChuoi() {
+    let chuoi = document.getElementById('chuoi').value;
+    let demSoTu = 1;
+    let array = Array.from(chuoi);
+    for (let i = 0; i < array.length; i++) {
+      if (array[i]==' ' && array[i-2] !== ' ' && array[i-1] !== ' ') {
+        demSoTu++;
+      }
+    }
+    document.getElementById('result').innerHTML = `Có ${demSoTu} từ trong đoạn văn`;
+  }
+</script>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Cờ Caro</title>
+</head>
+<body>
+<p id="display"></p>
+</body>
+<script>
+    let array = new Array(10);
+    for (let i = 0; i < array.length; i++) {
+        array[i] = new Array(10);
+        for (let j = 0; j < array[i].length; j++) {
+            array[i][j] = '';
+        }
+    }
+    let isPlayerX = true;
+    display();
+
+    function ticTac(i, j) {
+        if (array[i][j] == '') {
+            if (isPlayerX) {
+                array[i][j] = 'X';
+                isPlayerX = !isPlayerX;
+            } else {
+                array[i][j] = 'O';
+                isPlayerX = !isPlayerX;
+            }
+        } else {
+            alert('Ô này đã đánh rồi');
+        }
+        const winningCells = checkWin(array,array[i][j]);
+        if (winningCells) {
+            for (let [r, c] of winningCells) {
+
+            }
+            alert('Bên '+array[i][j]+' đã chiến thắng');
+        }
+        display();
+    }
+
+    function checkWin(board, player) {
+        const size = board.length;
+        const directions = [
+            [0, 1],   // ngang →
+            [1, 0],   // dọc ↓
+            [1, 1],   // chéo ↘
+            [1, -1],  // chéo ↙
+        ];
+        for (let row = 0; row < size; row++) {
+            for (let col = 0; col < size; col++) {
+                if (board[row][col] !== player) continue;
+                for (let [dx, dy] of directions) {
+                    let positions = [[row, col]];
+                    let r = row + dx;
+                    let c = col + dy;
+                    while (r >= 0 && r < size && c >= 0 && c < size && board[r][c] === player) {
+                        positions.push([r, c]);
+                        if (positions.length === 5) return positions;
+                        r += dx;
+                        c += dy;
+                    }
+                }
+            }
+        }
+        return null; // Không thắng
+    }
+
+    function display() {
+        let displayTable = `<table id= 'board' border=1px style="border-collapse: collapse">`;
+        for (let i = 0; i < array.length; i++) {
+            displayTable += `<tr>`;
+            for (let j = 0; j < array[i].length; j++) {
+                displayTable += `<td onclick="ticTac(${i},${j})" style="text-align: center; width: 40px;height: 40px">${array[i][j]}</td>`
+            }
+            displayTable += `</tr>`;
+        }
+        displayTable += `</table>`;
+        document.getElementById('display').innerHTML = displayTable;
+    }
+</script>
+</html>

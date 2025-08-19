@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<label>Nhập 1 chuỗi </label>
+<input id="chuoi" type="text">
+<label>Ký tự muốn thay thế</label>
+<input style="width: 40px" id="ky_tu_thay_ra" type="text">
+<label>Ký tự được thay thế vào</label>
+<input style="width: 40px" id="ky_tu_thay_vao" type="text">
+<button onclick="thayTheKyTu()">Thay thế</button>
+<p id='result'></p>
+</body>
+<script>
+  function thayTheKyTu() {
+    let chuoi = document.getElementById('chuoi').value;
+    let kyTuThayRa = document.getElementById('ky_tu_thay_ra').value;
+    let kyTuThayVao = document.getElementById('ky_tu_thay_vao').value;
+    let array = Array.from(chuoi);
+    for (let i = 0; i < array.length; i++) {
+      if (array[i]==kyTuThayRa) {
+        array[i]=kyTuThayVao;
+      }
+    }
+    document.getElementById('result').innerHTML = array.join('');
+  }
+</script>
+</html>

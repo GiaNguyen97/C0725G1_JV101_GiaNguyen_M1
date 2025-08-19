@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Tạo và in mảng 2 chiều</h1>
+<label for='so_cot'>Nhập số cột</label>
+<input id="so_cot" type="number">
+<label for='so_dong'>Nhập số dòng</label>
+<input id="so_dong" type="number">
+<button onclick="taoMangHaiChieu()">Tạo mảng 2 chiều</button>
+<p id="result1"></p>
+</body>
+<script>
+    let array = [];
+    function taoMangHaiChieu() {
+        let col = +document.getElementById('so_cot').value;
+        let row = +document.getElementById('so_dong').value;
+        let array = [];
+        let result = '';
+        for (let i=0;i<row;i++) {
+            array[i] = [];
+            result += '[';
+
+            for (let j=0;j<col;j++) {
+                array[i][j] = Math.floor(Math.random()*10);
+                result += array[i][j] + ', ';
+            }
+            result = result.slice(0,-2);
+            result += ']<br>';
+        }
+        document.getElementById('result1').innerHTML = 'Mảng 2 chiều đã tạo là<br>'+result;
+    }
+</script>
+</html>
