@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p id ='result'></p>
+<button onclick="checkChanBangLe()">Kiểm tra số phần tử bằng số phần tử lẻ</button>
+</body>
+<script>
+    let n = +prompt('nhập số phần tử của mảng');
+    let array = new Array(n);
+    let soChan=0, soLe =0;
+    for (let i =0;i<array.length;i++) {
+        array[i] = +prompt(`Nhập giá trị phần tử thứ ${i+1}`);
+        if (array[i]%2===0) {
+            soChan++;
+        } else {
+            soLe++;
+        }
+    }
+    document.getElementById('result').innerHTML = 'Mảng bạn vừa nhập là ['+array+']';
+    function checkChanBangLe() {
+        if (soLe===soChan) {
+            alert('OK');
+        } else {
+            alert('NO');
+        }
+    }
+
+</script>
+</html>

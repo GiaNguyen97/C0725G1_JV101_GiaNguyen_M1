@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<label for="text">Nhập 1 chuỗi</label>
+<input id="text" type="text">
+<button onclick="chayFuncition()">Check</button>
+</body>
+<script>
+    function chayFuncition() {
+        let str = document.getElementById('text').value;
+        if (checkString(str)) {
+            alert('OK');
+        } else {
+            alert('NO');
+        }
+    }
+
+    function checkString(str) {
+        let chuThuong = 0;
+        let chuHoa = 0;
+        let array = Array.from(str);
+        for (let i = 0; i < array.length; i++) {
+            if (array[i].toLowerCase() !== array[i].toUpperCase()) {
+                if (array[i] === array[i].toLowerCase()) {
+                    chuThuong++;
+                } else {
+                    chuHoa++
+                }
+            }
+        }
+        if (chuThuong === chuHoa) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+</html>

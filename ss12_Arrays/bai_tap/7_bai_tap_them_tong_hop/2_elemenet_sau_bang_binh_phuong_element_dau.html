@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p id='result'></p>
+<button onclick="checkDauBinhPhuongBangCuoi()">Check</button>
+</body>
+<script>
+    let n = +prompt('nhập số phần tử của mảng');
+    let array = new Array(n);
+    for (let i = 0; i < array.length; i++) {
+        array[i] = +prompt(`Nhập giá trị phần tử thứ ${i + 1}`);
+    }
+    document.getElementById('result').innerHTML = 'Mảng bạn vừa nhập là ['+array+']';
+    function checkDauBinhPhuongBangCuoi() {
+        if (checkArray(array)) {
+            alert('Đúng. Mảng bạn nhập từng phần tử ở vị trí 1/2 mảng sau có giá trị bằng bình phương từng phần tử đầu');
+        } else {
+            alert('Sai. Mảng bạn nhập từng phần tử ở vị trí 1/2 mảng sau không có giá trị bằng bình phương từng phần tử đầu');
+        }
+    }
+
+    function checkArray(arr) {
+        if (arr.length % 2 === 0) {
+            for (let i = 0; i < (arr.length / 2); i++) {
+                if (arr[i] * arr[i] !== arr[i + arr.length / 2]) {
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
+        return true;
+    }
+</script>
+</html>

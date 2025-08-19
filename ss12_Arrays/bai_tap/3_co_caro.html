@@ -16,7 +16,20 @@
         }
     }
     let isPlayerX = true;
+    function display() {
+        let displayTable = `<table id= 'board' border=1px style="border-collapse: collapse">`;
+        for (let i = 0; i < array.length; i++) {
+            displayTable += `<tr>`;
+            for (let j = 0; j < array[i].length; j++) {
+                displayTable += `<td id ='td${i}_${j}' onclick="ticTac(${i},${j})" style="text-align: center; width: 40px;height: 40px">${array[i][j]}</td>`
+            }
+            displayTable += `</tr>`;
+        }
+        displayTable += `</table>`;
+        document.getElementById('display').innerHTML = displayTable;
+    }
     display();
+
 
     function ticTac(i, j) {
         if (array[i][j] == '') {
@@ -33,7 +46,7 @@
         const winningCells = checkWin(array,array[i][j]);
         if (winningCells) {
             for (let [r, c] of winningCells) {
-
+                document.getElementById(`td${r}_${c}`).style.backgroundColor = "red";
             }
             alert('Bên '+array[i][j]+' đã chiến thắng');
         }
@@ -67,17 +80,6 @@
         return null; // Không thắng
     }
 
-    function display() {
-        let displayTable = `<table id= 'board' border=1px style="border-collapse: collapse">`;
-        for (let i = 0; i < array.length; i++) {
-            displayTable += `<tr>`;
-            for (let j = 0; j < array[i].length; j++) {
-                displayTable += `<td onclick="ticTac(${i},${j})" style="text-align: center; width: 40px;height: 40px">${array[i][j]}</td>`
-            }
-            displayTable += `</tr>`;
-        }
-        displayTable += `</table>`;
-        document.getElementById('display').innerHTML = displayTable;
-    }
+
 </script>
 </html>
