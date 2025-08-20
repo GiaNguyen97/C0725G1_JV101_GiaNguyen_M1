@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let nameStar = ['Polaris', 'Aldebaran', 'Deneb', 'Vega', 'Altair', 'Dubhe', 'Regulus'];
+    let nameConstellation = ['Ursa Minor', 'Taurus', 'Cygnus', 'Lyra', 'Aquila', 'Ursa Major', 'Leo']
+    let str = prompt('Nhập tên 1 ngôi sao');
+    checkStar(str);
+
+    function checkStar(str) {
+        let check = true;
+        for (let i = 0; i<nameStar.length;i++) {
+            if (str.toLowerCase()===nameStar[i].toLowerCase()) {
+                alert(nameConstellation[i]);
+                return;
+            }
+        }
+        if (check) {
+            alert('Không tìm thấy chòm sao thích hợp');
+        }
+
+    }
+</script>
+</body>
+</html>
