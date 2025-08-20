@@ -33,9 +33,11 @@
         .ten_san_pham {
             width: 200px;
         }
+
         .hien_thi_loi {
             color: red;
         }
+
         button {
             background-color: #4CAF50;
             color: white;
@@ -51,12 +53,17 @@
 <body>
 <h1>Ứng dụng quản lý</h1>
 <div>
-    <h3>Thêm sản phẩm mới</h3>
+    <h3 style="display: inline-block" id="them_san_pham">Thêm sản phẩm mới</h3>
+    <h3 style="display: none" id="sua_san_pham">Sửa tên sản phẩm</h3>
     <table>
         <tr>
             <td>
-                <input onkeydown="themMoiSanPham()" id="ten_san_pham_moi" type="text" placeholder="Tên sản phẩm mới">
-                <button onclick="themMoiSanPham()">Thêm mới</button>
+                <input style="display: inline-block" onkeydown="themMoiSanPham()" id="ten_san_pham_moi" type="text"
+                       placeholder="Tên sản phẩm mới">
+                <input style="display: none" onkeydown="luuSanPham()" id="ten_san_pham_sua" type="text"
+                       placeholder="Tên mới của sản phẩm">
+                <button style="display: inline-block" id='btn_add' onclick="themMoiSanPham()">Thêm mới</button>
+                <button style="display: none" id='btn_edit' onclick="luuSanPham()">Lưu</button>
             </td>
         </tr>
         <tr>
@@ -71,6 +78,7 @@
 </body>
 <script>
     let danhSachSanPham = [];
+    let viTriCanSua;
     display();
 
     function display() {
@@ -85,19 +93,19 @@
                 hienThi += `<tr class="cot_bang2">`;
                 hienThi += `<td class="so_thu_tu">${i + 1}</td>
                         <td class="ten_san_pham">${danhSachSanPham[i]}</td>
-                        <td ><button class="bnt_xoa" onclick="suaSanPham('${[i]}')">Sửa</button></td>
+                        <td ><button class="bnt_sua" onclick="suaSanPham('${[i]}')">Sửa</button></td>
                         <td ><button class="bnt_xoa" onclick="xoaSanPham('${[i]}')">Xóa</button></td>`
                 hienThi += `</tr>`;
             }
         }
-
         hienThi += `</table>`;
         document.getElementById('hien_thi').innerHTML = hienThi;
     }
 
     function themMoiSanPham() {
         let tenSanPhamMoi = document.getElementById('ten_san_pham_moi').value;
-        if (event.key === 'Enter' || typeof event.key==='undefined') {
+
+        if (event.key === 'Enter' || typeof event.key === 'undefined') {
             if (tenSanPhamMoi.trim() === '' || kiemTraTonTai(tenSanPhamMoi)) {
                 if (tenSanPhamMoi.trim() === '') {
                     document.getElementById('hien_thi_loi').innerHTML = 'Tên sản phẩm không được để trống';
@@ -106,6 +114,7 @@
                     document.getElementById('ten_san_pham_moi').value = '';
                 }
             } else {
+                document.getElementById('hien_thi_loi').innerHTML = '';
                 danhSachSanPham.push(tenSanPhamMoi);
                 document.getElementById('ten_san_pham_moi').value = '';
                 display();
@@ -114,14 +123,37 @@
     }
 
     function suaSanPham(index) {
-        let tenSauKhiSua = prompt('Sửa tên sản phẩm');
-        danhSachSanPham[index] = tenSauKhiSua;
-        display();
+        document.getElementById('ten_san_pham_sua').value = danhSachSanPham[index];
+        viTriCanSua = index;
+        document.getElementById('btn_add').style.display = 'none';
+        document.getElementById('btn_edit').style.display = 'inline-block';
+        document.getElementById('them_san_pham').style.display = 'none';
+        document.getElementById('sua_san_pham').style.display = 'inline-block';
+        document.getElementById('ten_san_pham_moi').style.display = 'none';
+        document.getElementById('ten_san_pham_sua').style.display = 'inline-block';
+    }
+
+    function luuSanPham() {
+        if (event.key === 'Enter' || typeof event.key === 'undefined') {
+            if (confirm('Xác nhận sửa tên sản phẩm')) {
+                danhSachSanPham[viTriCanSua] = document.getElementById('ten_san_pham_sua').value;
+                document.getElementById('btn_add').style.display = 'inline-block';
+                document.getElementById('btn_edit').style.display = 'none';
+                document.getElementById('them_san_pham').style.display = 'inline-block';
+                document.getElementById('sua_san_pham').style.display = 'none';
+                document.getElementById('ten_san_pham_moi').style.display = 'inline-block';
+                document.getElementById('ten_san_pham_sua').style.display = 'none';
+                document.getElementById('ten_san_pham_moi').value = '';
+                display();
+            }
+        }
     }
 
     function xoaSanPham(index) {
-        danhSachSanPham.splice(index, 1);
-        display();
+        if (confirm('Bạn muốn xóa sản phẩm này?')) {
+            danhSachSanPham.splice(index, 1);
+            display();
+        }
     }
 
     function kiemTraTonTai(tenSanPhamMoi) {
