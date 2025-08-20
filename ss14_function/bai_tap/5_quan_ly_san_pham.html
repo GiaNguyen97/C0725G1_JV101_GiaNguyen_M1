@@ -6,13 +6,25 @@
     <style>
         .bang2 {
             border-collapse: collapse;
-            padding: 3px;
+            font-family: Arial, sans-serif;
         }
 
-        .bang2, .dong_bang2, .cot_bang2, .so_thu_tu, .ten_san_pham, th {
-            border: 1px solid black;
-            padding: 3px;
+        .bang2 th, .bang2 td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
         }
+
+        .bang2 th {
+            background-color: #f2f2f2;
+            color: #333;
+            text-align: center;
+        }
+
+        .bang2 tr:hover {
+            background-color: #f9f9f9;
+        }
+
 
         .so_thu_tu {
             text-align: center;
@@ -24,7 +36,16 @@
         .hien_thi_loi {
             color: red;
         }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
 
+        }
     </style>
 </head>
 <body>
@@ -65,8 +86,7 @@
                 hienThi += `<td class="so_thu_tu">${i + 1}</td>
                         <td class="ten_san_pham">${danhSachSanPham[i]}</td>
                         <td ><button class="bnt_xoa" onclick="suaSanPham('${[i]}')">Sửa</button></td>
-                        <td ><button class="bnt_xoa" onclick="xoaSanPham('${[i]}')">Xóa</button></td>
-                        <td class="dong_bang2"></td>`;
+                        <td ><button class="bnt_xoa" onclick="xoaSanPham('${[i]}')">Xóa</button></td>`
                 hienThi += `</tr>`;
             }
         }
@@ -79,7 +99,7 @@
         let tenSanPhamMoi = document.getElementById('ten_san_pham_moi').value;
         if (event.key === 'Enter' || typeof event.key==='undefined') {
             if (tenSanPhamMoi.trim() === '' || kiemTraTonTai(tenSanPhamMoi)) {
-                if (tenSanPhamMoi === '') {
+                if (tenSanPhamMoi.trim() === '') {
                     document.getElementById('hien_thi_loi').innerHTML = 'Tên sản phẩm không được để trống';
                 } else {
                     document.getElementById('hien_thi_loi').innerHTML = 'Sản phẩm đã tồn tại';
