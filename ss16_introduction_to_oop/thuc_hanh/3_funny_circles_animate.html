@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id="myCanvas" width="600" height="400" style="border:1px solid #000;"></canvas>
+
+<script>
+  const canvas = document.getElementById('myCanvas');
+  const ctx = canvas.getContext('2d');
+
+  // Tạo mảng chứa các hình tròn
+  const circles = [];
+
+  for (let i = 0; i < 10; i++) {
+    circles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: 20 + Math.random() * 10,
+      dx: (Math.random() - 0.5) * 4,
+      dy: (Math.random() - 0.5) * 4,
+      color: `hsl(${Math.random() * 360}, 70%, 60%)`
+    });
+  }
+
+  // Hàm vẽ hình tròn
+  function drawCircle(circle) {
+    ctx.beginPath();
+    ctx.arc(circle.x, circle.y, circle.radius, 0, Math.PI * 2);
+    ctx.fillStyle = circle.color;
+    ctx.fill();
+    ctx.closePath();
+  }
+
+  // Hàm cập nhật vị trí và vẽ lại
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    circles.forEach(circle => {
+      // Di chuyển
+      circle.x += circle.dx;
+      circle.y += circle.dy;
+
+      // Va chạm với mép canvas
+      if (circle.x + circle.radius > canvas.width || circle.x - circle.radius < 0) {
+        circle.dx *= -1;
+      }
+      if (circle.y + circle.radius > canvas.height || circle.y - circle.radius < 0) {
+        circle.dy *= -1;
+      }
+
+      drawCircle(circle);
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+</script>
+
+</body>
+
+</html>

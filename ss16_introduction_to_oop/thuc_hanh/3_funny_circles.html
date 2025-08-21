@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button onclick="createMultipleCircle()">Vẽ hình tròn</button>
+<canvas id="myCanvas" width="1368px" height="768px" style="border:1px solid #d3d3d3;"></canvas>
+</body>
+<script>
+    function Circle(x, y, radius) {
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+    }
+
+    function getRandomHex() {
+        return Math.floor(Math.random() * 255);
+    }
+
+    function getRandomColor() {
+        let red = getRandomHex();
+        let green = getRandomHex();
+        let blue = getRandomHex();
+        return "rgb(" + red + "," + blue + "," + green + ")";
+    }
+
+    function createCircle() {
+        let ctx = document.getElementById("myCanvas").getContext("2d");
+        let radius = Math.floor(Math.random() * 80);
+        let color = getRandomColor();
+        let x = Math.random() * window.innerWidth;
+        let y = Math.random() * window.innerHeight;
+        let circle = new Circle(x, y, radius);
+        ctx.beginPath();
+        ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
+        ctx.fillStyle = color;
+        ctx.fill();
+    }
+    function animate() {
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        Circle.forEach(Circle => {
+
+            Circle.x += Circle.dx;
+            Circle.y += Circle.dy;
+
+
+            if (Circle.x + Circle.radius > canvas.width || Circle.x - Circle.radius < 0) {
+                Circle.dx *= -1;
+            }
+            if (Circle.y + Circle.radius > canvas.height || Circle.y - Circle.radius < 0) {
+                Circle.dy *= -1;
+            }
+
+            createCircle();
+        });
+
+        requestAnimationFrame(animate);
+    }
+
+
+    function createMultipleCircle() {
+        let cavans = document.getElementById('myCanvas');
+        cavans.getContext('2d').clearRect(0,0,cavans.width,cavans.height);
+        for (let i = 0; i < 30; i++){
+            createCircle();
+        }
+    }
+</script>
+</html>

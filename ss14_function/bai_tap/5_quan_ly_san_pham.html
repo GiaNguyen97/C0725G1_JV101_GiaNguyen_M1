@@ -30,9 +30,6 @@
             text-align: center;
         }
 
-        .ten_san_pham {
-            width: 200px;
-        }
 
         .hien_thi_loi {
             color: red;
@@ -48,33 +45,49 @@
             transition: background-color 0.3s ease;
 
         }
+
+        .center-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-<h1>Ứng dụng quản lý</h1>
-<div>
-    <h3 style="display: inline-block" id="them_san_pham">Thêm sản phẩm mới</h3>
-    <h3 style="display: none" id="sua_san_pham">Sửa tên sản phẩm</h3>
-    <table>
-        <tr>
-            <td>
-                <input style="display: inline-block" onkeydown="themMoiSanPham()" id="ten_san_pham_moi" type="text"
-                       placeholder="Tên sản phẩm mới">
-                <input style="display: none" onkeydown="luuSanPham()" id="ten_san_pham_sua" type="text"
-                       placeholder="Tên mới của sản phẩm">
-                <button style="display: inline-block" id='btn_add' onclick="themMoiSanPham()">Thêm mới</button>
-                <button style="display: none" id='btn_edit' onclick="luuSanPham()">Lưu</button>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <span class="hien_thi_loi" id="hien_thi_loi"></span>
-            </td>
-        </tr>
-    </table>
-    <h3>Danh sách tất cả sản phẩm</h3>
+<div class="center-container">
+    <div class="content">
+        <h1>Ứng dụng quản lý</h1>
+        <div>
+            <h3 style="display: inline-block" id="them_san_pham">Thêm sản phẩm mới</h3>
+            <h3 style="display: none" id="sua_san_pham">Sửa tên sản phẩm</h3>
+            <table>
+                <tr>
+                    <td>
+                        <input style="display: inline-block" onkeydown="themMoiSanPham()" id="ten_san_pham_moi"
+                               type="text"
+                               placeholder="Tên sản phẩm mới">
+                        <input style="display: none" onkeydown="luuSanPham()" id="ten_san_pham_sua" type="text"
+                               placeholder="Tên mới của sản phẩm">
+                        <button style="display: inline-block" id='btn_add' onclick="themMoiSanPham()">Thêm mới</button>
+                        <button style="display: none" id='btn_edit' onclick="luuSanPham()">Lưu</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="hien_thi_loi" id="hien_thi_loi"></span>
+                    </td>
+                </tr>
+            </table>
+            <h3>Danh sách tất cả sản phẩm</h3>
+        </div>
+        <p id="hien_thi"></p>
+    </div>
 </div>
-<p id="hien_thi"></p>
+
 </body>
 <script>
     let danhSachSanPham = [];
