@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    let str = prompt('Nhập 1 chuỗi');
+    let array = Array.from(str);
+    let char = prompt('Nhập 1 ký tự');
+    alert(kiemTraKyTuTrongMang(array, char));
+
+    function kiemTraKyTuTrongMang(mang, char) {
+        let conut = 0
+        for (let i = 0; i < mang.length; i++) {
+            if (mang[i] == char) {
+                conut++;
+            }
+        }
+        if (conut > 0) {
+            return conut;
+        } else {
+            return -1;
+        }
+    }
+</script>
+</html>

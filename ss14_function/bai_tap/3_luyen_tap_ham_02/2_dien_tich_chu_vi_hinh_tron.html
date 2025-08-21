@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    let n = +prompt('Nhập bán kính hình tròn');
+    alert('Chu vi = ' + chuViHinhTron(n) + ', diện tích = ' + dienTichHinhTron(n));
+
+    function chuViHinhTron(r) {
+        return r * 2 * Math.PI;
+    }
+
+    function dienTichHinhTron(r) {
+        return r * r * Math.PI;
+    }
+</script>
+</html>

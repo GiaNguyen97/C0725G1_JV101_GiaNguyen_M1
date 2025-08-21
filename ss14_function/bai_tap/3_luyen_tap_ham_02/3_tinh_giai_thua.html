@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    do {
+        let n = +prompt('Nhập số nguyên bất kỳ');
+        if (n >= 0) {
+            alert(n + '! = ' + tinhGiaiThua(n));
+            break;
+        } else {
+            alert('Vui lòng nhập lại')
+        }
+    } while (true);
+
+
+    function tinhGiaiThua(number) {
+        let result = 1;
+        for (let i = 1; i <= number; i++) {
+            result *= i;
+        }
+        return result;
+    }
+</script>
+</html>

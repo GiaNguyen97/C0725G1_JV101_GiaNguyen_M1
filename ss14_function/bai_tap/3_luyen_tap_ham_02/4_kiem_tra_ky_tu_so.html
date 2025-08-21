@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    let n = prompt('Nhập 1 ký tự');
+    if (kiemTraKyTuSo(n)) {
+        alert('Ký tự bạn vừa nhập là ký tự số');
+    } else {
+        alert('Ký tự bạn vừa nhập không phải là ký tự số');
+    }
+
+    function kiemTraKyTuSo(number) {
+        let demDau = 0;
+        let demSo = 0;
+        for (let i = 0; i < number.length; i++) {
+            if (number[i] < '0' || number[i] > '9') {
+                if (demDau < 2) {
+                    if (number[i] !== '.' && number[i] !== '-') {
+                        return false;
+                    } else {
+                        demDau++;
+                    }
+                } else {
+                    return false;
+                }
+            } else {
+                demSo++
+            }
+        }
+        return demSo > 0;
+    }
+</script>
+</html>
