@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<label for = 'celsius'>Nhập độ C</label>
+<input id = 'celsius' type="number">
+<button onclick="toFahrenheit()">Đổi sang độ F</button>
+<button onclick="toKelvin()">Đổi sang độ K</button>
+<p id = 'to_fahrenheit'></p>
+<p id = 'to_kelvin'></p>
+</body>
+<script>
+    class Temperature {
+        celsius;
+
+        constructor(celsius) {
+            if (celsius > -273) {
+                this.celsius = celsius;
+            }
+        }
+
+        setCelsius(celsius) {
+            if (celsius > -273) {
+                this.celsius = celsius;
+            }
+        }
+
+        getCelsius() {
+            return this.celsius;
+        }
+
+        toFahrenheit() {
+            return this.celsius * 1.8 + 32;
+        }
+        toKelvin() {
+            return this.celsius + 273.15
+        }
+    }
+    function toFahrenheit() {
+        let celsius = +document.getElementById('celsius').value;
+        let temperature = new Temperature(celsius);
+        document.getElementById('to_fahrenheit').innerHTML = temperature.getCelsius() + ' độ C bằng '+ temperature.toFahrenheit()+' độ F';
+    }
+    function toKelvin() {
+        let celsius = +document.getElementById('celsius').value;
+        let temperature = new Temperature(celsius);
+        document.getElementById('to_kelvin').innerHTML = temperature.getCelsius() + ' độ C bằng '+ temperature.toKelvin()+' độ K';
+    }
+</script>
+</html>

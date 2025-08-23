@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<label for="length">Nhập chiều dài</label>
+<input id='length' type="number">
+<label for="width">Nhập chiều rộng</label>
+<input id='width' type="number">
+<button onclick="perimeterRectangle()">Tính chu vi</button>
+<button onclick="areaRectangle()">Tính diện tích</button>
+<button onclick="drawOfRectangle()">Vẽ hình chữ nhật</button>
+<p id='display_perimeter'></p>
+<p id='display_area'></p>
+<canvas id="myCanvas" width="600" height="400" style="border:1px solid #000;"></canvas>
+</body>
+<script>
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+
+
+    class Rectangle {
+        length;
+        width;
+
+        constructor(length, width) {
+            this.length = length;
+            this.width = width;
+        }
+
+        setLength(length) {
+            this.length = length;
+        }
+
+        setWidth(width) {
+            this.width = width;
+        }
+
+        getLength() {
+            return this.length;
+        }
+
+        getWidth() {
+            return this.width;
+        }
+
+        getPerimeter() {
+            return 2 * (this.getLength() + this.getWidth());
+        }
+
+        getArea() {
+            return this.getLength() * this.getWidth();
+        }
+
+        getDraw() {
+            drawRectangle();
+        }
+    }
+
+    function drawRectangle() {
+        let length = +document.getElementById('length').value;
+        let width = +document.getElementById('width').value;
+        let rectangle = new Rectangle(length, width);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'blue';
+        ctx.fillRect(50, 50, rectangle.width * 20, rectangle.length * 20);
+
+    }
+
+    function perimeterRectangle() {
+        let length = +document.getElementById('length').value;
+        let width = +document.getElementById('width').value;
+        let rectangle = new Rectangle(length, width);
+        document.getElementById('display_perimeter').innerHTML = `Chu vi bằng ${rectangle.getPerimeter()}`;
+    }
+
+    function areaRectangle() {
+        let length = +document.getElementById('length').value;
+        let width = +document.getElementById('width').value;
+        let rectangle = new Rectangle(length, width);
+        document.getElementById('display_area').innerHTML = `Diện tích bằng ${rectangle.getArea()}`;
+    }
+
+    function drawOfRectangle() {
+        let length = +document.getElementById('length').value;
+        let width = +document.getElementById('width').value;
+        let rectangle = new Rectangle(length, width);
+        rectangle.getDraw();
+    }
+</script>
+</html>
