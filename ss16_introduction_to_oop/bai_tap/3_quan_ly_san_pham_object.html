@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .bang2 {
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+        }
+
+        .bang2 th, .bang2 td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .bang2 th {
+            background-color: #f2f2f2;
+            color: #333;
+            text-align: center;
+        }
+
+        .bang2 tr:hover {
+            background-color: #f9f9f9;
+        }
+
+
+        .so_thu_tu {
+            text-align: center;
+        }
+
+
+        .hien_thi_loi {
+            color: red;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+        }
+
+        .center-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="center-container">
+    <div class="content">
+        <h1>Ứng dụng quản lý</h1>
+        <div>
+            <h3 style="display: inline-block" id="them_san_pham">Thêm sản phẩm mới</h3>
+            <h3 style="display: none" id="sua_san_pham">Sửa tên sản phẩm</h3>
+            <table>
+                <tr>
+                    <td>
+                        <input style="display: inline-block" id="ten_san_pham_moi" type="text"
+                               placeholder="Tên sản phẩm mới">
+                        <input style="display: none" id="ten_san_pham_sua" type="text"
+                               placeholder="Tên mới của sản phẩm">
+                        <input style="display: inline-block" id="gia_san_pham_moi" type="number"
+                               placeholder="Giá sản phẩm mới">
+                        <input style="display: none" id="gia_san_pham_sua" type="number"
+                               placeholder="Giá mới của sản phẩm">
+                        <button style="display: inline-block" id='btn_add' onclick="quanLySanPham.themMoiSanPham()">Thêm
+                            mới
+                        </button>
+                        <button style="display: none" id='btn_edit' onclick="quanLySanPham.luuSanPham()">Lưu</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="hien_thi_loi" id="hien_thi_loi"></span>
+                    </td>
+                </tr>
+            </table>
+            <h3>Danh sách tất cả sản phẩm</h3>
+        </div>
+        <p id="hien_thi"></p>
+    </div>
+</div>
+
+</body>
+<script>
+    class SanPham {
+        tenSanPham;
+        giaSanPham;
+        constructor(tenSanPham, giaSanPham) {
+            this.tenSanPham = tenSanPham;
+            this.giaSanPham = giaSanPham;
+        }
+        settenSP(tenSanPham) {
+            this.tenSanPham = tenSanPham;
+        }
+        setgiaSP(giaSanPham) {
+            this.giaSanPham = giaSanPham;
+        }
+        gettenSP() {
+            return this.tenSanPham;
+        }
+        getgiaSP() {
+            return this.giaSanPham;
+        }
+    }
+
+    class QuanLySanPham {
+        danhSachSanPham = [];
+        constructor() {
+        }
+
+        setDanhSach (sanPham) {
+            this.danhSachSanPham.push(sanPham);
+        }
+
+        display() {
+            let hienThi = '';
+            hienThi += `<div style="padding: 5px">Hiện có ${this.danhSachSanPham.length} sản phẩm</div>`;
+            hienThi += `<table class="bang2"><tr>
+                        <th>STT</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Giá</th>
+                        <th colspan="3">Thao tác</th></tr>`;
+            if (this.danhSachSanPham.length > 0) {
+                for (let i = 0; i < this.danhSachSanPham.length; i++) {
+                    hienThi += `<tr class="cot_bang2">`;
+                    hienThi += `<td class="so_thu_tu">${i + 1}</td>
+                        <td class="ten_san_pham">${this.danhSachSanPham[i].tenSanPham}</td>
+                        <td class="gia_san_pham">${this.danhSachSanPham[i].giaSanPham} VNĐ</td>
+                        <td ><button class="bnt_sua" onclick="quanLySanPham.suaSanPham('${[i]}')">Sửa</button></td>
+                        <td ><button class="bnt_xoa" onclick="quanLySanPham.xoaSanPham('${[i]}')">Xóa</button></td>`
+                    hienThi += `</tr>`;
+                }
+            }
+            hienThi += `</table>`;
+            document.getElementById('hien_thi').innerHTML = hienThi;
+        }
+
+        themMoiSanPham() {
+            let tenSanPhamMoi = document.getElementById('ten_san_pham_moi').value;
+            let giaSanPhamMoi = +document.getElementById('gia_san_pham_moi').value;
+            if (tenSanPhamMoi.trim() === '' || this.kiemTraTonTai(tenSanPhamMoi)) {
+                if (tenSanPhamMoi.trim() === '') {
+                    document.getElementById('hien_thi_loi').innerHTML = 'Tên sản phẩm không được để trống';
+                } else {
+                    document.getElementById('hien_thi_loi').innerHTML = 'Sản phẩm đã tồn tại';
+                    document.getElementById('ten_san_pham_moi').value = '';
+                    document.getElementById('gia_san_pham_moi').value = '';
+                }
+            } else {
+                document.getElementById('hien_thi_loi').innerHTML = '';
+                let sanPham = new SanPham(tenSanPhamMoi, giaSanPhamMoi);
+                this.setDanhSach(sanPham);
+                document.getElementById('ten_san_pham_moi').value = '';
+                document.getElementById('gia_san_pham_moi').value = '';
+                this.display();
+            }
+        }
+
+        suaSanPham(index) {
+            document.getElementById('ten_san_pham_sua').value = quanLySanPham.danhSachSanPham[index].tenSanPham;
+            document.getElementById('gia_san_pham_sua').value = quanLySanPham.danhSachSanPham[index].giaSanPham;
+            this.viTriCanSua = index;
+            document.getElementById('btn_add').style.display = 'none';
+            document.getElementById('btn_edit').style.display = 'inline-block';
+            document.getElementById('them_san_pham').style.display = 'none';
+            document.getElementById('sua_san_pham').style.display = 'inline-block';
+            document.getElementById('ten_san_pham_moi').style.display = 'none';
+            document.getElementById('ten_san_pham_sua').style.display = 'inline-block';
+            document.getElementById('gia_san_pham_moi').style.display = 'none';
+            document.getElementById('gia_san_pham_sua').style.display = 'inline-block';
+        }
+
+        luuSanPham() {
+            if (confirm('Xác nhận sửa tên sản phẩm')) {
+                this.danhSachSanPham[this.viTriCanSua].tenSanPham = document.getElementById('ten_san_pham_sua').value;
+                this.danhSachSanPham[this.viTriCanSua].giaSanPham = document.getElementById('gia_san_pham_sua').value;
+                document.getElementById('btn_add').style.display = 'inline-block';
+                document.getElementById('btn_edit').style.display = 'none';
+                document.getElementById('them_san_pham').style.display = 'inline-block';
+                document.getElementById('sua_san_pham').style.display = 'none';
+                document.getElementById('ten_san_pham_moi').style.display = 'inline-block';
+                document.getElementById('ten_san_pham_sua').style.display = 'none';
+                document.getElementById('gia_san_pham_moi').style.display = 'inline-block';
+                document.getElementById('gia_san_pham_sua').style.display = 'none';
+                document.getElementById('ten_san_pham_moi').value = '';
+                document.getElementById('gia_san_pham_moi').value = '';
+                this.display();
+            }
+        }
+
+        xoaSanPham(index) {
+            if (confirm('Bạn muốn xóa sản phẩm này?')) {
+                this.danhSachSanPham.splice(index, 1);
+                this.display();
+            }
+        }
+
+        kiemTraTonTai(tenSanPhamMoi) {
+            for (let i = 0; i < this.danhSachSanPham.length; i++) {
+                if (tenSanPhamMoi.toLowerCase() === this.danhSachSanPham[i].tenSanPham.toLowerCase()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
+    let quanLySanPham = new QuanLySanPham();
+</script>
+</html>

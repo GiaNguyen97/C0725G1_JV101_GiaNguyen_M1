@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button onclick="switchButton()">SwitchButton</button>
+<p id="display"></p>
+</body>
+<script>
+    class SwitchButton {
+        status;
+        lamp;
+
+        constructor(status, lamp) {
+            this.status = status;
+            this.lamp = lamp;
+        }
+
+        connectToLamp(lamp) {
+            this.lamp = lamp
+        }
+
+        switchOff() {
+            this.lamp.turnOff()
+            this.status = true;
+        }
+
+        switchOn() {
+            this.lamp.turnOn();
+            this.status = false;
+        }
+    }
+
+    class ElectricLamp {
+        status;
+
+        constructor(status) {
+            this.status = status;
+        }
+
+        turnOff() {
+            return this.status = false;
+        }
+
+        turnOn() {
+            return this.status = true;
+        }
+    }
+
+    let lamp = new ElectricLamp(false);
+    let button = new SwitchButton();
+    button.connectToLamp(lamp);
+
+    function switchButton() {
+        if (button.status) {
+            button.switchOn();
+            document.getElementById('display').style.color = 'black'
+            document.getElementById('display').innerHTML = 'Trạng thái bóng đèn: ' + button.lamp.status + '<br>';
+            document.body.style.backgroundColor = 'yellow';
+        } else {
+            button.switchOff();
+            document.getElementById('display').style.color = 'white'
+            document.getElementById('display').innerHTML = 'Trạng thái bóng đèn: ' + button.lamp.status + '<br>';
+            document.body.style.backgroundColor = 'black';
+        }
+
+    }
+</script>
+</html>
