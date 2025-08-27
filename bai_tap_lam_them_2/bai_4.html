@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<label for="ten_moi">Tên</label>
+<input style="display: inline-block" id='ten_moi'>
+<input style="display: none" id='sua_ten_moi'>
+<label for="sdt_moi">Số điện thoại</label>
+<input style="display: inline-block" id='sdt_moi'>
+<input style="display: none" id='sua_sdt_moi'>
+<label for="dia_chi_moi">Địa chỉ</label>
+<input style="display: inline-block" id='dia_chi_moi'>
+<input style="display: none" id='sua_dia_chi_moi'>
+<span id='hien_thi_loi'></span>
+<button id="nut_them" style="display: inline-block" onclick="quanLyDanhBaDienThoai.themMoiDanhBa()">Thêm mới</button>
+<button id="nut_xoa" style="display: none" onclick="quanLyDanhBaDienThoai.luuDanhBa()">Lưu</button>
+<p id="hien_thi"></p>
+</body>
+<script>
+    class DanhBaDienThoai {
+        soDienThoai;
+        tenChuDanhBa;
+        diaChi;
+
+        constructor(tenChuDanhBa, soDienThoai, diaChi) {
+            this.soDienThoai = soDienThoai;
+            this.tenChuDanhBa = tenChuDanhBa;
+            this.diaChi = diaChi;
+        }
+
+        setsoDienThoai(soDienThoai) {
+            this.soDienThoai = soDienThoai;
+        }
+
+        getsoDienThoai() {
+            return this.soDienThoai;
+        }
+
+        settenChuDanhBa(tenChuDanhBa) {
+            this.tenChuDanhBa = tenChuDanhBa;
+        }
+
+        gettenChuDanhBa() {
+            return this.tenChuDanhBa;
+        }
+
+        setdiaChi(diaChi) {
+            this.diaChi = diaChi;
+        }
+
+        getdiaChi() {
+            return this.diaChi;
+        }
+    }
+
+    class QuanLyDanhBaDienThoai {
+        danhBaDienThoai = [];
+        viTriCanSua;
+
+        constructor() {
+        }
+
+        setDanhSach(danhBaDienThoai) {
+            this.danhBaDienThoai.push(danhBaDienThoai);
+        }
+
+        hienthi() {
+            let hienThi = '';
+            hienThi += `<div style="padding: 5px">DANH BẠ ĐIỆN THOẠI</div>`;
+            hienThi += `<table><tr>
+                        <th>Tên chủ danh bạ</th>
+                        <th>Số điện thoại</th>
+                        <th>Địa chỉ</th>
+                        <th colspan="2">Thao tác</th></tr>`;
+            if (this.danhBaDienThoai.length > 0) {
+                for (let i = 0; i < this.danhBaDienThoai.length; i++) {
+                    hienThi += `<tr>`;
+                    hienThi += `<td>${this.danhBaDienThoai[i].tenChuDanhBa}</td>
+                        <td>${this.danhBaDienThoai[i].soDienThoai}</td>
+                        <td>${this.danhBaDienThoai[i].diaChi}</td>
+                        <td><button onclick="quanLyDanhBaDienThoai.suaDanhBa('${[i]}')">Sửa</button></td>
+                        <td><button onclick="quanLyDanhBaDienThoai.xoaDanhBa('${[i]}')">Xóa</button></td>`
+                    hienThi += `</tr>`;
+                }
+            }
+            hienThi += `</table>`;
+            document.getElementById('hien_thi').innerHTML = hienThi;
+        }
+
+        themMoiDanhBa() {
+            let tenMoi = document.getElementById('ten_moi').value;
+            let sdtMoi = document.getElementById('sdt_moi').value;
+            let diaChiMoi = document.getElementById('dia_chi_moi').value;
+            if (sdtMoi.trim() === '' || this.kiemTraTonTai(sdtMoi)) {
+                if (sdtMoi.trim() === '') {
+                    document.getElementById('hien_thi_loi').innerHTML = 'Số điện thoại không được để trống';
+                } else {
+                    document.getElementById('hien_thi_loi').innerHTML = 'Số điện thoại đã tồn tại';
+                    document.getElementById('ten_moi').value = '';
+                    document.getElementById('sdt_moi').value = '';
+                    document.getElementById('dia_chi_moi').value = '';
+                }
+            } else {
+                document.getElementById('hien_thi_loi').innerHTML = '';
+                let danhBaDienThoai = new DanhBaDienThoai(tenMoi, sdtMoi, diaChiMoi);
+                this.setDanhSach(danhBaDienThoai);
+                document.getElementById('ten_moi').value = '';
+                document.getElementById('sdt_moi').value = '';
+                document.getElementById('dia_chi_moi').value = '';
+                this.hienthi();
+            }
+        }
+
+        suaDanhBa(viTri) {
+            document.getElementById('ten_moi').value = quanLyDanhBaDienThoai.danhBaDienThoai[viTri].tenChuDanhBa;
+            document.getElementById('sdt_moi').value = quanLyDanhBaDienThoai.danhBaDienThoai[viTri].soDienThoai;
+            document.getElementById('dia_chi_moi').value = quanLyDanhBaDienThoai.danhBaDienThoai[viTri].diaChi;
+            this.viTriCanSua = viTri;
+            document.getElementById('nut_them').style.display = 'none';
+            document.getElementById('nut_sua').style.display = 'inline-block';
+            document.getElementById('ten_moi').style.display = 'none';
+            document.getElementById('sua_ten_moi').style.display = 'inline-block';
+            document.getElementById('sdt_moi').style.display = 'none';
+            document.getElementById('sua_sdt_moi').style.display = 'inline-block';
+            document.getElementById('dia_chi_moi').style.display = 'none';
+            document.getElementById('sua_dia_chi_moi').style.display = 'inline-block';
+        }
+
+        luuDanhBa() {
+            if (confirm('Xác nhận địa chỉ liên hệ này')) {
+                this.danhBaDienThoai[this.viTriCanSua].tenChuDanhBa = document.getElementById('ten_moi').value;
+                this.danhBaDienThoai[this.viTriCanSua].soDienThoai = document.getElementById('sdt_moi').value;
+                this.danhBaDienThoai[this.viTriCanSua].diaChi = document.getElementById('dia_chi_moi').value;
+                document.getElementById('nut_them').style.display = 'inline-block';
+                document.getElementById('nut_sua').style.display = 'none';
+                document.getElementById('ten_moi').style.display = 'inline-block';
+                document.getElementById('sua_ten_moi').style.display = 'none';
+                document.getElementById('sdt_moi').style.display = 'inline-block';
+                document.getElementById('sua_sdt_moi').style.display = 'none';
+                document.getElementById('dia_chi_moi').style.display = 'inline-block';
+                document.getElementById('sua_dia_chi_moi').style.display = 'none';
+                document.getElementById('ten_moi').value = '';
+                document.getElementById('sdt_moi').value = '';
+                document.getElementById('dia_chi_moi').value = '';
+                this.hienthi();
+            }
+        }
+
+        xoaDanhBa(viTri) {
+            if (confirm('Bạn muốn xóa địa chỉ liên hệ này?')) {
+                this.danhBaDienThoai.splice(viTri, 1);
+                this.hienthi();
+            }
+        }
+
+        kiemTraTonTai(sdt) {
+            for (let i = 0; i < this.danhBaDienThoai.length; i++) {
+                if (sdt.toLowerCase() === this.danhBaDienThoai[i].soDienThoai) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
+    let quanLyDanhBaDienThoai = new QuanLyDanhBaDienThoai();
+</script>
+</html>

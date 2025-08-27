@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    let mang = [1, 5, 6, 11, 9, 20, 8, 0, 8, 1];
+    let doDaiMangHaiChieu = 1;
+    let mangHaiChieu = [];
+    let tongPhanTuMangHaiChieu = [];
+    mangHaiChieuTongLienKeBangTiepTheo(mang);
+
+    function mangHaiChieuTongLienKeBangTiepTheo(mang) {
+        for (let i = 0; i < mang.length; i++) {
+            if (mang[i - 1] + mang[i - 2] === mang[i]) {
+                mangHaiChieu[doDaiMangHaiChieu - 1] = [];
+                mangHaiChieu[doDaiMangHaiChieu - 1][0] = mang[i - 2];
+                mangHaiChieu[doDaiMangHaiChieu - 1][1] = mang[i - 1];
+                tongPhanTuMangHaiChieu[doDaiMangHaiChieu - 1] = mang[i];
+                doDaiMangHaiChieu++;
+            }
+        }
+        inMangHaiChieu(mangHaiChieu);
+
+        tongPhanTuMangHaiChieu.sort((a, b) => a - b);
+        for (let i = 0; i < mangHaiChieu.length; i++) {
+            let viTri = tongPhanTuMangHaiChieu.indexOf(mangHaiChieu[i][0] + mangHaiChieu[i][1]);
+            if (viTri !== i) {
+                let luuTam1 = mangHaiChieu[i][0];
+                let luuTam2 = mangHaiChieu[i][1];
+                mangHaiChieu[i][0] = mangHaiChieu[viTri][0];
+                mangHaiChieu[i][1] = mangHaiChieu[viTri][1];
+                mangHaiChieu[viTri][0] = luuTam1;
+                mangHaiChieu[viTri][1] = luuTam2;
+            }
+        }
+        inMangHaiChieu(mangHaiChieu);
+    }
+
+    function inMangHaiChieu(mangHaiChieu) {
+        for (let i = 0; i < mangHaiChieu.length; i++) {
+            if (i === mangHaiChieu.length - 1) {
+                document.write('[' + mangHaiChieu[i] + ']<br>');
+            } else {
+                document.write('[' + mangHaiChieu[i] + '],');
+            }
+        }
+    }
+
+</script>
+</html>

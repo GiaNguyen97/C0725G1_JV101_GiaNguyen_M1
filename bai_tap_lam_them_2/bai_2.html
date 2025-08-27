@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    taoCumTuVietTat('object     Oriented     programming');
+
+    function taoCumTuVietTat(chuoi) {
+        let demSoTu = 0;
+        let mangLuuTu = [];
+        let motTu = '';
+
+        for (let i = 0; i < chuoi.length; i++) {
+            if (chuoi[i] === ' ' || i === chuoi.length - 1) {
+                if (motTu.trim()!== '') {
+                    mangLuuTu[demSoTu] = motTu.trim();
+                    demSoTu++;
+                    motTu = '';
+                }
+            }
+            motTu += chuoi[i];
+        }
+
+        if (demSoTu === 1) {
+            document.write('Chuỗi chỉ có 1 từ nên không cần viết tắt');
+        } else {
+            for (let i = 0; i < demSoTu; i++) {
+                document.write(mangLuuTu[i][0].toUpperCase());
+            }
+        }
+    }
+</script>
+</html>
