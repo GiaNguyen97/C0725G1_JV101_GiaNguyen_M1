@@ -1,55 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Objects</title>
+    <meta charset="UTF-8">
+    <title>Objects</title>
 </head>
 <body>
 <div id="game"></div>
-<script >
-  class Hero {
-    constructor(image, top, left, right, size) {
-      this.image = image;
-      this.top = top;
-      this.left = left;
-      this.size = size;
+<button onclick="hero.upSpeed()">Tăng tốc</button>
+<button onclick="hero.downSpeed()">Giảm tốc</button>
+<script>
+    class Hero {
+        constructor(image, top, left, size,speed) {
+            this.image = image;
+            this.top = top;
+            this.left = left;
+            this.size = size;
+            this.speed = speed;
+        }
+
+        getHeroElement() {
+            return '<img width="' + this.size + '"' +
+                ' height="' + this.size + '"' +
+                ' src="' + this.image + '"' +
+                ' style="top: ' + this.top + 'px; left:' + this.left + 'px ;position:absolute;"  alt=""/>';
+        }
+
+        moveRight(speed) {
+            this.left += speed;
+            document.getElementById('game').innerHTML = hero.getHeroElement();
+        }
+
+        moveLeft(speed) {
+            this.left -= speed;
+            document.getElementById('game').innerHTML = hero.getHeroElement();
+        }
+
+        moveUp(speed) {
+            this.top -= speed;
+            document.getElementById('game').innerHTML = hero.getHeroElement();
+        }
+
+        moveDown(speed) {
+            this.top += speed;
+            document.getElementById('game').innerHTML = hero.getHeroElement();
+        }
+        upSpeed (){
+            this.speed +=10;
+        }
+        downSpeed (){
+            this.speed -=10;
+            if (this.speed<0) {
+                this.speed = 0;
+            }
+        }
+
     }
 
-    getHeroElement (){
-      return '<img width="'+ this.size + '"' +
-              ' height="'+ this.size + '"' +
-              ' src="' + this.image +'"' +
-              ' style="top: '+this.top+'px; left:'+this.left+'px ;position:absolute;"  alt=""/>';
-
-    }
-    moveRight() {
-      this.left += 20;
-    }
-    moveLeft() {
-      this.left -= 20;
-    }
-    moveUp() {
-      this.top += 20;
-    }moveDown() {
-      this.top -= 20;
-    }
-
-  }
-
-  let hero = new Hero('kirito_chibi.png', 20, 30, 200);
-
-  function start(){
-    if(hero.left < window.innerWidth - hero.size){
-      hero.moveRight();
-      hero.moveUp();
-      hero.moveLeft();
-      hero.moveDown();
-    }
+    let hero = new Hero('kirito_chibi.png', 20, 30, 200, 20);
     document.getElementById('game').innerHTML = hero.getHeroElement();
-    setTimeout(start,500);
-  }
 
-  start();
+    document.addEventListener("keydown", function (event) {
+        switch (event.key) {
+            case "ArrowUp":
+            case "w":
+                hero.moveUp(hero.speed);
+                break;
+            case "ArrowDown":
+            case "s":
+                hero.moveDown(hero.speed)
+                break;
+            case "ArrowLeft":
+            case "a":
+                hero.moveLeft(hero.speed);
+                break;
+            case "ArrowRight":
+            case "d":
+                hero.moveRight(hero.speed);
+                break;
+        }
+    });
 </script>
 </body>
 </html>
