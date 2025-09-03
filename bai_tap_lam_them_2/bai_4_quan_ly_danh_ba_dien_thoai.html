@@ -16,7 +16,7 @@
 <input style="display: none" id='sua_dia_chi_moi'>
 <span id='hien_thi_loi'></span>
 <button id="nut_them" style="display: inline-block" onclick="quanLyDanhBaDienThoai.themMoiDanhBa()">Thêm mới</button>
-<button id="nut_xoa" style="display: none" onclick="quanLyDanhBaDienThoai.luuDanhBa()">Lưu</button>
+<button id="nut_sua" style="display: none" onclick="quanLyDanhBaDienThoai.luuDanhBa()">Lưu</button>
 <p id="hien_thi"></p>
 </body>
 <script>
@@ -78,9 +78,9 @@
             if (this.danhBaDienThoai.length > 0) {
                 for (let i = 0; i < this.danhBaDienThoai.length; i++) {
                     hienThi += `<tr>`;
-                    hienThi += `<td>${this.danhBaDienThoai[i].tenChuDanhBa}</td>
-                        <td>${this.danhBaDienThoai[i].soDienThoai}</td>
-                        <td>${this.danhBaDienThoai[i].diaChi}</td>
+                    hienThi += `<td>${this.danhBaDienThoai[i].tenMayTinh}</td>
+                        <td>${this.danhBaDienThoai[i].id}</td>
+                        <td>${this.danhBaDienThoai[i].nhaSanXuat}</td>
                         <td><button onclick="quanLyDanhBaDienThoai.suaDanhBa('${[i]}')">Sửa</button></td>
                         <td><button onclick="quanLyDanhBaDienThoai.xoaDanhBa('${[i]}')">Xóa</button></td>`
                     hienThi += `</tr>`;
@@ -115,9 +115,9 @@
         }
 
         suaDanhBa(viTri) {
-            document.getElementById('ten_moi').value = quanLyDanhBaDienThoai.danhBaDienThoai[viTri].tenChuDanhBa;
-            document.getElementById('sdt_moi').value = quanLyDanhBaDienThoai.danhBaDienThoai[viTri].soDienThoai;
-            document.getElementById('dia_chi_moi').value = quanLyDanhBaDienThoai.danhBaDienThoai[viTri].diaChi;
+            document.getElementById('ten_moi').value = quanLyDanhBaDienThoai.danhBaDienThoai[viTri].tenMayTinh;
+            document.getElementById('sdt_moi').value = quanLyDanhBaDienThoai.danhBaDienThoai[viTri].id;
+            document.getElementById('dia_chi_moi').value = quanLyDanhBaDienThoai.danhBaDienThoai[viTri].nhaSanXuat;
             this.viTriCanSua = viTri;
             document.getElementById('nut_them').style.display = 'none';
             document.getElementById('nut_sua').style.display = 'inline-block';
@@ -131,9 +131,9 @@
 
         luuDanhBa() {
             if (confirm('Xác nhận địa chỉ liên hệ này')) {
-                this.danhBaDienThoai[this.viTriCanSua].tenChuDanhBa = document.getElementById('ten_moi').value;
-                this.danhBaDienThoai[this.viTriCanSua].soDienThoai = document.getElementById('sdt_moi').value;
-                this.danhBaDienThoai[this.viTriCanSua].diaChi = document.getElementById('dia_chi_moi').value;
+                this.danhBaDienThoai[this.viTriCanSua].tenMayTinh = document.getElementById('ten_moi').value;
+                this.danhBaDienThoai[this.viTriCanSua].id = document.getElementById('sdt_moi').value;
+                this.danhBaDienThoai[this.viTriCanSua].nhaSanXuat = document.getElementById('dia_chi_moi').value;
                 document.getElementById('nut_them').style.display = 'inline-block';
                 document.getElementById('nut_sua').style.display = 'none';
                 document.getElementById('ten_moi').style.display = 'inline-block';
@@ -158,7 +158,7 @@
 
         kiemTraTonTai(sdt) {
             for (let i = 0; i < this.danhBaDienThoai.length; i++) {
-                if (sdt.toLowerCase() === this.danhBaDienThoai[i].soDienThoai) {
+                if (sdt.toLowerCase() === this.danhBaDienThoai[i].id) {
                     return true;
                 }
             }

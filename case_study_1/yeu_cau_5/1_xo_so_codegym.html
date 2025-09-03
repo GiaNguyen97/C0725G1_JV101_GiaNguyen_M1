@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        button {
+            margin: 5px;
+        }
+
+        table {
+            border: 1px solid black;
+            border-collapse: collapse;
+            margin: 5px;
+
+        }
+
+        td {
+            width: 40px;
+            height: 40px;
+            border: 1px solid black;
+            text-align: center;
+            font-size: 25px;
+        }
+        th {
+            border: 1px solid white;
+            border-right: 1px solid black;
+        }
+
+    </style>
+</head>
+<body>
+<h1>XỔ SỐ CODEGYM</h1>
+<p id='display'></p>
+<p id='choose_ticket'></p>
+<p id='result'></p>
+<p id='str_result'></p>
+<p id='money_result'></p>
+</body>
+<script>
+    class Purchaser {
+        myTicket = [];
+        isChoosingTicket = false;
+        constructor() {
+        }
+
+        setMyTicket(myTicket) {
+            this.myTicket.push(myTicket);
+        }
+
+        getMyTicket() {
+            return this.myTicket;
+        }
+
+        buyTicket() {
+            if (this.isChoosingTicket) {
+                alert('Bạn đang chọn vé, vui lòng xác nhận trước khi mua vé mới.');
+                return;
+            }
+            if (this.myTicket.length < 4) {
+                let method = +prompt('Chọn phương thức mua vé số:\n' +
+                    '1. Tự chọn số. \n' +
+                    '2. Hệ thống tự random.\n' +
+                    'Nhập số thứ tự phương thức để chọn');
+
+                if (method === 1) {
+                    this.isChoosingTicket = true;
+                    this.chooseTicket();
+                } else if (method === 2) {
+                    this.randomTicket();
+                    companyTicket.display();
+                }
+
+            } else {
+                alert('Bạn chỉ được mua tối đa 4 vé');
+            }
+        }
+
+        chooseTicket() {
+            let chooseTicket = `<table><tr>`;
+            for (let i = 0; i < 6; i++) {
+                chooseTicket += `<td><select id="select_${i}">`;
+                for (let j = 0; j <= 99; j++) {
+                    let value = j.toString().padStart(2, '0');
+                    chooseTicket += `<option value="${value}">${value}</option>`;
+                }
+                chooseTicket += `</select></td>`;
+            }
+            chooseTicket += `</tr></table>`;
+            chooseTicket += `<button onclick="puchaser.confirmTicket()">Xác nhận vé</button>`;
+            document.getElementById('choose_ticket').innerHTML = chooseTicket;
+        }
+
+        confirmTicket() {
+            let ticket = [];
+            for (let i = 0; i < 6; i++) {
+                ticket.push(document.getElementById(`select_${i}`).value);
+            }
+            this.setMyTicket(ticket);
+            this.isChoosingTicket = false;
+            companyTicket.display();
+            document.getElementById('choose_ticket').innerHTML = '';
+        }
+
+        randomTicket() {
+            let newTicket = [];
+            for (let i = 0; i < 6; i++) {
+                newTicket[i] = Math.floor(Math.random() * 99).toString().padStart(2, '0');
+            }
+            this.setMyTicket(newTicket);
+        }
+
+        checkResult() {
+            let result = '<p>Kết quả xổ số</p>';
+            result += `<table><tr>
+                        <td>${companyTicket.result[0]}</td>
+                        <td>${companyTicket.result[1]}</td>
+                        <td>${companyTicket.result[2]}</td>
+                        <td>${companyTicket.result[3]}</td>
+                        <td>${companyTicket.result[4]}</td>
+                        <td>${companyTicket.result[5]}</td>
+                    </tr></table>`
+            document.getElementById('result').innerHTML = result;
+            let count;
+            let arrayCount = [];
+            let moneyResult =0;
+            for (let i = 0; i < this.myTicket.length; i++) {
+                count = 0;
+                for (let j = this.myTicket[i].length - 1; j >= 0; j--) {
+                    if (this.myTicket[i][j] == companyTicket.result[j]) {
+                        count++;
+                    }
+                }
+                if (typeof arrayCount[count] == "undefined") {
+                    arrayCount[count] = 1;
+                } else {
+                    arrayCount[count]++;
+                }
+            }
+            let strResult = 'Chúc mừng bạn đã trúng ';
+            if (typeof arrayCount[6] !== "undefined") {
+                strResult += arrayCount[6] + ' vé giải nhất, ';
+                moneyResult += arrayCount[6]*1000000000;
+            }
+            if (typeof arrayCount[5] !== "undefined") {
+                strResult += arrayCount[5] + ' vé giải nhì, ';
+                moneyResult += arrayCount[5]*500000000;
+            }
+            if (typeof arrayCount[4] !== "undefined") {
+                strResult += arrayCount[4] + ' vé giải ba, ';
+                moneyResult += arrayCount[4]*100000000;
+            }
+            if (typeof arrayCount[3] !== "undefined") {
+                strResult += arrayCount[3] + ' vé giải khuyến khích, ';
+                moneyResult += arrayCount[3]*500000;
+            }
+            strResult = strResult.slice(0, -2);
+            strResult += '.';
+            if (strResult === 'Chúc mừng bạn đã trún.') {
+                alert('Chúc bạn may mắn lần sau');
+            } else {
+                alert('TRÚNG VÉ SỐ RỒI!!!!!!')
+                document.getElementById('str_result').innerHTML = strResult;
+            }
+            const formatted = new Intl.NumberFormat('vi-VN').format(moneyResult);
+            document.getElementById('money_result').innerHTML = 'Bạn trúng '+formatted+ ' VNĐ';
+        }
+
+    }
+
+    class CompanyTicket {
+        result = [];
+
+        constructor(result) {
+            this.result = result;
+        }
+
+        setResult(result) {
+            this.result = result;
+        }
+
+        getResult() {
+            return this.result;
+        }
+
+        display() {
+            let display = '';
+            for (let i = 0; i < puchaser.myTicket.length; i++) {
+                display += `<table><tr><th>Vé thứ ${i+1}</th>
+                        <td>${puchaser.myTicket[i][0]}</td>
+                        <td>${puchaser.myTicket[i][1]}</td>
+                        <td>${puchaser.myTicket[i][2]}</td>
+                        <td>${puchaser.myTicket[i][3]}</td>
+                        <td>${puchaser.myTicket[i][4]}</td>
+                        <td>${puchaser.myTicket[i][5]}</td>
+                    </tr></table>`
+            }
+            display += `<button onclick="puchaser.buyTicket()">Mua vé</button>` +
+                `<button onclick="puchaser.checkResult()">Xem kết quả</button>`;
+            document.getElementById('display').innerHTML = display;
+        }
+    }
+
+    let companyTicket = new CompanyTicket(['00', '00', '00', '00', '00', '00']);
+    let puchaser = new Purchaser();
+    companyTicket.display();
+
+</script>
+</html>

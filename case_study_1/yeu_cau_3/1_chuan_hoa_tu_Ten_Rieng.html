@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    capitalizeEachWord('tRuong    TaN   HAI');
+
+    function capitalizeEachWord(str) {
+        let countWord = 0;
+        let arrayWord = [];
+        let oneWord = '';
+        let wordLengthMax = '';
+
+        for (let i = 0; i < str.length; i++) {
+            oneWord += str[i];
+            if (str[i] === ' ' || i === str.length - 1) {
+                if (oneWord.trim() !== '') {
+                    arrayWord[countWord] = oneWord.trim().charAt(0).toUpperCase() + oneWord.trim().toLowerCase().slice(1);
+                    if (wordLengthMax.length < arrayWord[countWord].length) {
+                        wordLengthMax = arrayWord[countWord];
+                    }
+                    countWord++;
+                    oneWord = '';
+                }
+            }
+        }
+
+        document.write(str + '<br>');
+        document.write(arrayWord.join(' ') + '<br>');
+        document.write(wordLengthMax + '<br>');
+    }
+</script>
+</html>

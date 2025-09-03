@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    document.write(countCharUpperLower('HellOCodeym1'));
+
+    function countCharUpperLower(str) {
+        let arrayCountChar = [0, 0];
+        for (let i = 0; i < str.length; i++) {
+            if (str[i].toUpperCase() !== str[i].toLowerCase()) {
+                if (str[i].toUpperCase() === str[i]) {
+                    arrayCountChar[0]++;
+                } else {
+                    arrayCountChar[1]++;
+                }
+            }
+        }
+        return arrayCountChar;
+    }
+
+</script>
+</html>

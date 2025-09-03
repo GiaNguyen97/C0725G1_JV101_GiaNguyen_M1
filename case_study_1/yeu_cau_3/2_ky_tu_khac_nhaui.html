@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    document.write(differentSymbolsNaive('cabca'));
+
+    function differentSymbolsNaive(str) {
+        let countChar = 0;
+        let arrayChar = [];
+        for (let i = 0; i < str.length; i++) {
+            if (!arrayChar.includes(str[i])) {
+                arrayChar[countChar] = str[i];
+                countChar++;
+            }
+        }
+        return countChar;
+    }
+</script>
+</html>

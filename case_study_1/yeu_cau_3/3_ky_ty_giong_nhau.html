@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    document.write(commonCharacterCount('aabcc', 'adcaa'));
+
+    function commonCharacterCount(str1, str2) {
+        let lengthArray = 0;
+        let arrayChar1 = [];
+        for (let i = 0; i < str1.length; i++) {
+            if (!arrayChar1.includes(str1[i])) {
+                arrayChar1[lengthArray] = {char:str1[i],countChar: 1};
+                lengthArray++;
+            }
+        }
+        return countChar;
+    }
+</script>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+
+    document.write(findSortFibonacci([1, 5, 832040, 13, 9, 12, 8, 0, 5, 1]))
+
+    function findSortFibonacci(array) {
+        let fibonacciInArray = [];
+        let arrayFibonacci = [0,1];
+        for (let i = 0; i < array.length; i++) {
+            while (arrayFibonacci[arrayFibonacci.length-1]<array[i]) {
+                arrayFibonacci.push(arrayFibonacci[arrayFibonacci.length-1]+arrayFibonacci[arrayFibonacci.length-2]);
+            }
+            if (arrayFibonacci.includes(array[i])) {
+                fibonacciInArray.push(array[i])
+            }
+        }
+        return fibonacciInArray.sort((a, b) => a - b);
+    }
+</script>
+</html>

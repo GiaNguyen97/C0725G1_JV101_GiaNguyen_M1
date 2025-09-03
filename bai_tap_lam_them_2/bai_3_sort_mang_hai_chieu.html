@@ -12,7 +12,7 @@
     let doDaiMangHaiChieu = 1;
     let mangHaiChieu = [];
     let tongPhanTuMangHaiChieu = [];
-    mangHaiChieuTongLienKeBangTiepTheo(mang);
+    inMangHaiChieu(mangHaiChieuTongLienKeBangTiepTheo(mang));
 
     function mangHaiChieuTongLienKeBangTiepTheo(mang) {
         for (let i = 0; i < mang.length; i++) {
@@ -24,7 +24,6 @@
                 doDaiMangHaiChieu++;
             }
         }
-        inMangHaiChieu(mangHaiChieu);
 
         tongPhanTuMangHaiChieu.sort((a, b) => a - b);
         for (let i = 0; i < mangHaiChieu.length; i++) {
@@ -38,7 +37,7 @@
                 mangHaiChieu[viTri][1] = luuTam2;
             }
         }
-        inMangHaiChieu(mangHaiChieu);
+        return mangHaiChieu;
     }
 
     function inMangHaiChieu(mangHaiChieu) {

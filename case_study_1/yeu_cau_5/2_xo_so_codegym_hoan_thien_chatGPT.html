@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Xổ Số CodeGym</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #f9f9f9, #dce9f9);
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #3498db;
+            color: white;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        table {
+            margin: 10px auto;
+            border-collapse: collapse;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        td, th {
+            border: 1px solid #ddd;
+            padding: 10px;
+            font-size: 22px;
+            min-width: 45px;
+            font-weight: bold;
+        }
+
+        th {
+            background: #3498db;
+            color: white;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px auto;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            max-width: 550px;
+        }
+
+        #money_result {
+            font-size: 20px;
+            font-weight: bold;
+            color: green;
+        }
+
+        .highlight {
+            background: #f1c40f;
+            animation: blink 0.8s infinite alternate;
+        }
+
+        @keyframes blink {
+            from {
+                background-color: #f1c40f;
+            }
+            to {
+                background-color: #f39c12;
+            }
+        }
+    </style>
+</head>
+<body>
+<h1>XỔ SỐ CODEGYM</h1>
+<div id="display" class="card"></div>
+<div id="choose_ticket" class="card"></div>
+<div id="result" class="card"></div>
+<p id="str_result"></p>
+<p id="money_result"></p>
+
+<script>
+    class Purchaser {
+        constructor() {
+            this.myTicket = [];
+            this.isChoosingTicket = false;
+        }
+
+        setMyTicket(ticket) {
+            this.myTicket.push(ticket);
+        }
+
+        getMyTicket() {
+            return this.myTicket;
+        }
+
+        buyTicket() {
+            if (this.isChoosingTicket) return alert('Xác nhận vé trước khi mua vé mới!');
+            if (this.myTicket.length >= 4) return alert('Chỉ được mua tối đa 4 vé');
+
+            const method = +prompt("Chọn phương thức mua vé:\n1. Tự chọn\n2. Random");
+            method === 1 ? this.chooseTicket() : this.randomTicket();
+        }
+
+        chooseTicket() {
+            this.isChoosingTicket = true;
+            let html = `<table><tr>`;
+            for (let i = 0; i < 6; i++) {
+                html += `<td><select id="select_${i}">` +
+                    Array.from({length: 100}, (_, j) =>
+                        `<option value="${String(j).padStart(2, '0')}">${String(j).padStart(2, '0')}</option>`
+                    ).join("") +
+                    `</select></td>`;
+            }
+            html += `</tr></table><button onclick="purchaser.confirmTicket()">Xác nhận vé</button>`;
+            document.getElementById('choose_ticket').innerHTML = html;
+        }
+
+        confirmTicket() {
+            const ticket = Array.from({length: 6}, (_, i) =>
+                document.getElementById(`select_${i}`).value
+            );
+            this.setMyTicket(ticket);
+            this.isChoosingTicket = false;
+            document.getElementById('choose_ticket').innerHTML = '';
+            company.display();
+        }
+
+        randomTicket() {
+            const ticket = Array.from({length: 6}, () =>
+                String(Math.floor(Math.random() * 100)).padStart(2, '0')
+            );
+            this.setMyTicket(ticket);
+            company.display();
+        }
+
+        checkResult() {
+            const result = company.result;
+            document.getElementById('result').innerHTML = `
+    <h3>Kết quả đang quay...</h3>
+    <table id="resultTable"><tr>
+      ${Array(6).fill(0).map(() => `<td>??</td>`).join('')}
+    </tr></table>
+  `;
+
+            const cells = document.querySelectorAll("#resultTable td");
+
+            // quay từ phải qua trái
+            [...cells].reverse().forEach((cell, index) => {
+                let interval = setInterval(() => {
+                    cell.innerText = String(Math.floor(Math.random() * 100)).padStart(2, "0");
+                }, 100);
+
+                setTimeout(() => {
+                    clearInterval(interval);
+                    cell.innerText = result[cells.length - 1 - index]; // gán kết quả thật
+                    cell.classList.add("highlight");
+                }, 1500 + index * 800);
+            });
+
+            setTimeout(() => this.showPrize(result), 1500 + 6 * 800 + 500);
+        }
+
+        showPrize(result) {
+            const rewards = {
+                6: {name: "Giải Nhất", money: 1_000_000_000},
+                5: {name: "Giải Nhì", money: 500_000_000},
+                4: {name: "Giải Ba", money: 100_000_000},
+                3: {name: "Giải Khuyến khích", money: 500_000}
+            };
+
+            let money = 0;
+            let prizeCount = {3: 0, 4: 0, 5: 0, 6: 0};
+
+            this.myTicket.forEach(ticket => {
+                let count = 0;
+                // check từ phải sang trái
+                for (let i = 5; i >= 0; i--) {
+                    if (ticket[i] === result[i]) {
+                        count++;
+                    } else break; // ngừng khi sai 1 số
+                }
+                if (rewards[count]) {
+                    prizeCount[count]++;
+                    money += rewards[count].money;
+                }
+            });
+
+            if (money === 0) {
+                alert("Chúc bạn may mắn lần sau!");
+                document.getElementById('str_result').innerText = "Bạn không trúng giải nào 😢";
+                document.getElementById('money_result').innerText = "";
+                return;
+            }
+
+            alert("🎉 Bạn đã trúng thưởng!");
+            let str = Object.keys(prizeCount)
+                .filter(k => prizeCount[k] > 0)
+                .map(k => `${prizeCount[k]} vé ${rewards[k].name}`)
+                .join(", ");
+
+            document.getElementById('str_result').innerText = "Bạn trúng: " + str;
+            document.getElementById('money_result').innerText =
+                "Tổng tiền: " + new Intl.NumberFormat('vi-VN').format(money) + " VNĐ";
+        }
+    }
+
+    class Company {
+        constructor(result) {
+            this.result = result;
+        }
+
+        display() {
+            const tickets = purchaser.getMyTicket().map((t, i) => `
+          <table><tr><th>Vé ${i + 1}</th>${t.map(n => `<td>${n}</td>`).join('')}</tr></table>
+        `).join('');
+            document.getElementById('display').innerHTML = tickets +
+                `<button onclick="purchaser.buyTicket()">Mua vé</button>` +
+                `<button onclick="purchaser.checkResult()">Xem kết quả</button>`;
+        }
+    }
+
+    const company = new Company(["00", "00", "00", "00", "00", "00"]);
+    const purchaser = new Purchaser();
+    company.display();
+</script>
+</body>
+</html>

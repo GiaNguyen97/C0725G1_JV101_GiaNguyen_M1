@@ -3,10 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            height: 100%;
+        }
+
+        .left {
+            flex: 1;
+        }
+
+        .right {
+            flex: 1;
+        }
+    </style>
 </head>
 <body>
-<button onclick="switchButton()">SwitchButton</button>
-<p id="display"></p>
+<div class="container">
+    <div class="left" id='left'>
+        <button onclick="switchButton()">SwitchButton</button>
+        <button onclick="switchLamp()">Đổi bóng đèn</button>
+        <p id="display1"></p>
+    </div>
+    <div class="right" id='right'>
+        <p id="display2"></p>
+    </div>
+</div>
 </body>
 <script>
     class SwitchButton {
@@ -49,22 +77,48 @@
         }
     }
 
-    let lamp = new ElectricLamp(false);
+    let lamp1 = new ElectricLamp(false);
+    let lamp2 = new ElectricLamp(false);
     let button = new SwitchButton();
-    button.connectToLamp(lamp);
+    let check = true;
+
+    function switchLamp() {
+        if (check) {
+            button.connectToLamp(lamp1);
+            check = false;
+        } else {
+            button.connectToLamp(lamp2);
+            check = true;
+        }
+    }
 
     function switchButton() {
-        if (button.status) {
-            button.switchOn();
-            document.getElementById('display').style.color = 'black'
-            document.getElementById('display').innerHTML = 'Trạng thái bóng đèn: ' + button.lamp.status + '<br>';
-            document.body.style.backgroundColor = 'yellow';
+        if (check) {
+            if (button.status) {
+                button.switchOn();
+                document.getElementById('display2').style.color = 'black'
+                document.getElementById('display2').innerHTML = 'Trạng thái bóng đèn 2: ' + button.lamp.status + '<br>';
+                document.getElementById('right').style.backgroundColor = 'yellow';
+            } else {
+                button.switchOff();
+                document.getElementById('display2').style.color = 'white'
+                document.getElementById('display2').innerHTML = 'Trạng thái bóng đèn 2: ' + button.lamp.status + '<br>';
+                document.getElementById('right').style.backgroundColor = 'black';
+            }
         } else {
-            button.switchOff();
-            document.getElementById('display').style.color = 'white'
-            document.getElementById('display').innerHTML = 'Trạng thái bóng đèn: ' + button.lamp.status + '<br>';
-            document.body.style.backgroundColor = 'black';
+            if (button.status) {
+                button.switchOn();
+                document.getElementById('display1').style.color = 'black'
+                document.getElementById('display1').innerHTML = 'Trạng thái bóng đèn 1: ' + button.lamp.status + '<br>';
+                document.getElementById('left').style.backgroundColor = 'yellow';
+            } else {
+                button.switchOff();
+                document.getElementById('display1').style.color = 'white'
+                document.getElementById('display1').innerHTML = 'Trạng thái bóng đèn 1: ' + button.lamp.status + '<br>';
+                document.getElementById('left').style.backgroundColor = 'black';
+            }
         }
+
 
     }
 </script>

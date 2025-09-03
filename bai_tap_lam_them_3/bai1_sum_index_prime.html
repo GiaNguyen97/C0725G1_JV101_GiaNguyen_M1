@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    let n;
+
+    do {
+        n = +prompt('nhập số phần tử của mảng');
+        if (n <= 50 && n > 0 && Number.isInteger(n)) {
+            break;
+        } else {
+            alert('Nhập n là số nguyên dương nhỏ hơn hoặc bằng 50');
+        }
+    } while (true);
+    document.write('[');
+
+    let array = new Array(n);
+    for (let i = 0; i < array.length; i++) {
+        array[i] = +prompt(`Nhập giá trị phần tử thứ ${i + 1}`);
+        if (i === array.length - 1) {
+            document.write(array[i] + ']<br>');
+        } else {
+            document.write(array[i] + ', ');
+        }
+    }
+    document.write(sumIndexPrime(array));
+
+    function sumIndexPrime(array) {
+        let sum = 0;
+        for (let i = 0; i < array.length; i++) {
+            if (checkPrime(i)) {
+                sum += array[i];
+            }
+        }
+        return sum;
+    }
+
+    function checkPrime(number) {
+        if (number < 2) {
+            return false
+        }
+        for (let i = 2; i <= Math.sqrt(number); i++) {
+            if (number % i === 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+</script>
+</html>

@@ -9,14 +9,14 @@
 <p id="display"></p>
 </body>
 <script>
-    let array = new Array(10);
+    let array = new Array(15);
     let isPlayerX = true;
     let gameOver = true;
 
     function startGame() {
         gameOver = false;
         for (let i = 0; i < array.length; i++) {
-            array[i] = new Array(10);
+            array[i] = new Array(15);
             for (let j = 0; j < array[i].length; j++) {
                 array[i][j] = '';
             }
@@ -38,50 +38,51 @@
     }
 
     function ticTac(i, j) {
-        if (gameOver) {
-            return;
-        }
-        if (array[i][j] == '') {
-            if (isPlayerX) {
-                array[i][j] = 'X';
-                isPlayerX = !isPlayerX;
-            } else {
-                array[i][j] = 'O';
-                isPlayerX = !isPlayerX;
-            }
+        if (gameOver) return;
+
+        if (array[i][j] === '') {
+            array[i][j] = isPlayerX ? 'X' : 'O';
+            isPlayerX = !isPlayerX;
         } else {
             alert('Ô này đã đánh rồi');
-        }
-        const winningCells = checkWin(array, array[i][j]);
-        display();
-        if (winningCells) {
-            for (let [i, j] of winningCells) {
-                document.getElementById(`td${i}_${j}`).style.color = "red";
-            }
-            alert('Bên ' + array[i][j] + ' đã chiến thắng');
-            gameOver = true;
+            return;
         }
 
+        const player = array[i][j];
+        const winningCells = checkWin(array, player);
+        display();
+
+        if (winningCells) {
+            for (let [r, c] of winningCells) {
+                document.getElementById(`td${r}_${c}`).style.color = "red";
+            }
+            alert('Bên ' + player + ' đã chiến thắng');
+            gameOver = true;
+        }
     }
 
     function checkWin(board, player) {
         const size = board.length;
-        const directions = [
-            [0, 1],
-            [1, 0],
-            [1, 1],
-            [1, -1],
-        ];
+        const unplayer = (player === 'X') ? 'O' : 'X';
+        const directions = [[0,1],[1,0],[1,1],[1,-1]];
+
         for (let row = 0; row < size; row++) {
             for (let col = 0; col < size; col++) {
                 if (board[row][col] !== player) continue;
+
                 for (let [dx, dy] of directions) {
                     let positions = [[row, col]];
-                    let r = row + dx;
-                    let c = col + dy;
+                    let r = row + dx, c = col + dy;
+
                     while (r >= 0 && r < size && c >= 0 && c < size && board[r][c] === player) {
                         positions.push([r, c]);
-                        if (positions.length === 5) return positions;
+                        if (positions.length >= 5) {
+                            const prev = board[row - dx]?.[col - dy];
+                            const next = board[r + dx]?.[c + dy];
+                            if (prev !== unplayer || next !== unplayer) {
+                                return positions.slice(0,5);
+                            }
+                        }
                         r += dx;
                         c += dy;
                     }
