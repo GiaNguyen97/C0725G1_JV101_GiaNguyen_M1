@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game puzzle</title>
+    <style>
+        img {
+            width: 300px;
+            height: 80px;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <td onclick="changePicture('picture1',listPicture1)">
+            <img src="http://demo.codegym.vn/8/puzzlegame/img/panda_swap_part1x1.jpg" id='picture1'>
+        </td>
+    </tr>
+    <tr>
+        <td onclick="changePicture('picture2',listPicture2)">
+            <img src="http://demo.codegym.vn/8/puzzlegame/img/panda_swap_part2x1.jpg" id='picture2'>
+        </td>
+    </tr>
+    <tr>
+        <td onclick="changePicture('picture3',listPicture3)">
+            <img src="http://demo.codegym.vn/8/puzzlegame/img/panda_swap_part3x1.jpg" id='picture3'>
+        </td>
+    </tr>
+    <tr>
+        <td onclick="changePicture('picture4',listPicture4)">
+            <img src="http://demo.codegym.vn/8/puzzlegame/img/panda_swap_part4x1.jpg" id='picture4'>
+        </td>
+    </tr>
+    <tr>
+        <td onclick="changePicture('picture5',listPicture5)">
+            <img src="http://demo.codegym.vn/8/puzzlegame/img/panda_swap_part5x1.jpg" id='picture5'>
+        </td>
+    </tr>
+
+</table>
+</body>
+<script>
+    const listPicture1 = ['http://demo.codegym.vn/8/puzzlegame/img/panda_swap_part1x1.jpg',
+        'http://demo.codegym.vn/8/puzzlegame/img/funny-cat1_part1x1.jpg',
+        'http://demo.codegym.vn/8/puzzlegame/img/monkey_part1x1.jpg'];
+    const listPicture2 = ['http://demo.codegym.vn/8/puzzlegame/img/panda_swap_part2x1.jpg',
+        'http://demo.codegym.vn/8/puzzlegame/img/funny-cat1_part2x1.jpg',
+        'http://demo.codegym.vn/8/puzzlegame/img/monkey_part2x1.jpg'];
+    const listPicture3 = ['http://demo.codegym.vn/8/puzzlegame/img/panda_swap_part3x1.jpg',
+        'http://demo.codegym.vn/8/puzzlegame/img/funny-cat1_part3x1.jpg',
+        'http://demo.codegym.vn/8/puzzlegame/img/monkey_part3x1.jpg'];
+    const listPicture4 = ['http://demo.codegym.vn/8/puzzlegame/img/panda_swap_part4x1.jpg',
+        'http://demo.codegym.vn/8/puzzlegame/img/funny-cat1_part4x1.jpg',
+        'http://demo.codegym.vn/8/puzzlegame/img/monkey_part4x1.jpg'];
+    const listPicture5 = ['http://demo.codegym.vn/8/puzzlegame/img/panda_swap_part5x1.jpg',
+        'http://demo.codegym.vn/8/puzzlegame/img/funny-cat1_part5x1.jpg',
+        'http://demo.codegym.vn/8/puzzlegame/img/monkey_part5x1.jpg'];
+
+    let currentIndexes = {
+        picture1: 0,
+        picture2: 0,
+        picture3: 0,
+        picture4: 0,
+        picture5: 0
+    };
+
+    function changePicture(imgElementId, imageList) {
+        const imgElement = document.getElementById(imgElementId);
+        currentIndexes[imgElementId] = (currentIndexes[imgElementId] + 1) % imageList.length;
+        imgElement.src = imageList[currentIndexes[imgElementId]];
+        const values = Object.values(currentIndexes);
+        if (values.every(v => v === values[0])) {
+            highlightImages(true);
+            alert("Bingo");
+        } else {
+            highlightImages(false);
+        }
+    }
+    function highlightImages(isWin) {
+        const ids = ["picture1", "picture2", "picture3", "picture4", "picture5"];
+        ids.forEach(id => {
+            document.getElementById(id).style.border = isWin ? "3px solid red" : "none";
+        });
+    }
+</script>
+</html>
