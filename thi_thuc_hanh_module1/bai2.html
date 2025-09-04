@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    document.write(demKyTuInHoa('abcdef 123F aA'));
+
+    function demKyTuInHoa(string) {
+        let demKyTuInHoa = 0;
+        for (let i = 0; i < string.length; i++) {
+            if (string[i] === string[i].toUpperCase() && string[i].toUpperCase() !== string[i].toLowerCase()) {
+                demKyTuInHoa++;
+            }
+        }
+        if (demKyTuInHoa > 0) {
+            return demKyTuInHoa;
+        } else {
+            return 'The Strings is not contain upper char';
+        }
+    }
+</script>
+</html>

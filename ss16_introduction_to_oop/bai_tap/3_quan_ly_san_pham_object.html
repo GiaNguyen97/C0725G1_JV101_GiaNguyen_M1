@@ -137,8 +137,8 @@
                 for (let i = 0; i < this.danhSachSanPham.length; i++) {
                     hienThi += `<tr class="cot_bang2">`;
                     hienThi += `<td class="so_thu_tu">${i + 1}</td>
-                        <td class="ten_san_pham">${this.danhSachSanPham[i].tenSanPham}</td>
-                        <td class="gia_san_pham">${this.danhSachSanPham[i].giaSanPham} VNĐ</td>
+                        <td class="ten_san_pham">${this.danhSachSanPham[i].maDienThoai}</td>
+                        <td class="gia_san_pham">${this.danhSachSanPham[i].tenDienThoai} VNĐ</td>
                         <td ><button class="bnt_sua" onclick="quanLySanPham.suaSanPham('${[i]}')">Sửa</button></td>
                         <td ><button class="bnt_xoa" onclick="quanLySanPham.xoaSanPham('${[i]}')">Xóa</button></td>`
                     hienThi += `</tr>`;
@@ -170,8 +170,8 @@
         }
 
         suaSanPham(index) {
-            document.getElementById('ten_san_pham_sua').value = quanLySanPham.danhSachSanPham[index].tenSanPham;
-            document.getElementById('gia_san_pham_sua').value = quanLySanPham.danhSachSanPham[index].giaSanPham;
+            document.getElementById('ten_san_pham_sua').value = quanLySanPham.danhSachSanPham[index].maDienThoai;
+            document.getElementById('gia_san_pham_sua').value = quanLySanPham.danhSachSanPham[index].tenDienThoai;
             this.viTriCanSua = index;
             document.getElementById('btn_add').style.display = 'none';
             document.getElementById('btn_edit').style.display = 'inline-block';
@@ -185,8 +185,8 @@
 
         luuSanPham() {
             if (confirm('Xác nhận sửa tên sản phẩm')) {
-                this.danhSachSanPham[this.viTriCanSua].tenSanPham = document.getElementById('ten_san_pham_sua').value;
-                this.danhSachSanPham[this.viTriCanSua].giaSanPham = document.getElementById('gia_san_pham_sua').value;
+                this.danhSachSanPham[this.viTriCanSua].maDienThoai = document.getElementById('ten_san_pham_sua').value;
+                this.danhSachSanPham[this.viTriCanSua].tenDienThoai = document.getElementById('gia_san_pham_sua').value;
                 document.getElementById('btn_add').style.display = 'inline-block';
                 document.getElementById('btn_edit').style.display = 'none';
                 document.getElementById('them_san_pham').style.display = 'inline-block';
@@ -210,7 +210,7 @@
 
         kiemTraTonTai(tenSanPhamMoi) {
             for (let i = 0; i < this.danhSachSanPham.length; i++) {
-                if (tenSanPhamMoi.toLowerCase() === this.danhSachSanPham[i].tenSanPham.toLowerCase()) {
+                if (tenSanPhamMoi.toLowerCase() === this.danhSachSanPham[i].maDienThoai.toLowerCase()) {
                     return true;
                 }
             }

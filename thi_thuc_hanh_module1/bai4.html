@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .bang2 {
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+        }
+
+        .bang2 th, .bang2 td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .bang2 th {
+            background-color: #f2f2f2;
+            color: #333;
+            text-align: center;
+        }
+
+        .bang2 tr:hover {
+            background-color: #f9f9f9;
+        }
+
+
+        .so_thu_tu {
+            text-align: center;
+        }
+
+
+        .hien_thi_loi {
+            color: red;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+        }
+
+        .center-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="center-container">
+    <div class="content">
+        <h1>Ứng dụng quản lý sản phẩm điện thoại</h1>
+        <div>
+            <h3 style="display: inline-block" id="them_san_pham">Thêm sản phẩm mới</h3>
+            <h3 style="display: none" id="sua_san_pham">Sửa thông tin sản phẩm</h3>
+            <table>
+                <tr>
+                    <td>
+                        <input style="display: inline-block" id="ma_dien_thoai_moi" type="text"
+                               placeholder="Mã điện thoại">
+                        <input style="display: none" id="sua_ma_dien_thoai" type="text"
+                               placeholder="Mã điện thoại">
+                        <input style="display: inline-block" id="ten_dien_thoai_moi" type="text"
+                               placeholder="Tên điện thoại">
+                        <input style="display: none" id="sua_ten_dien_thoai" type="text"
+                               placeholder="Tên điện thoại">
+                        <input style="display: inline-block" id="hang_san_xuat_moi" type="text"
+                               placeholder="Hãng sản xuất">
+                        <input style="display: none" id="sua_hang_san_xuat" type="text"
+                               placeholder="Hãng sản xuất">
+                        <input style="display: inline-block" id="gia_dien_thoai_moi" type="number"
+                               placeholder="Giá điện thoại">
+                        <input style="display: none" id="sua_gia_dien_thoai" type="number"
+                               placeholder="Giá điện thoại">
+                        <button style="display: inline-block" id='btn_add'
+                                onclick="quanLySanPhamDienThoai.themMoiSanPham()">Thêm
+                            mới
+                        </button>
+                        <button style="display: none" id='btn_edit'
+                                onclick="quanLySanPhamDienThoai.luuThongTinSanPham()">Lưu
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="hien_thi_loi" id="hien_thi_loi"></span>
+                    </td>
+                </tr>
+            </table>
+            <h3>Danh sách tất cả sản phẩm</h3>
+        </div>
+        <p id="hien_thi"></p>
+    </div>
+</div>
+
+</body>
+<script>
+    class DienThoai {
+        maDienThoai;
+        tenDienThoai;
+        hangSanXuat;
+        giaDienThoai;
+
+        constructor(maDienThoai, tenDienThoai, hangSanXuat, giaDienThoai) {
+            this.maDienThoai = maDienThoai;
+            this.tenDienThoai = tenDienThoai;
+            this.hangSanXuat = hangSanXuat;
+            this.giaDienThoai = giaDienThoai;
+        }
+
+        setMaDT(maDienThoai) {
+            this.maDienThoai = maDienThoai;
+        }
+
+        setTenDT(tenDienThoai) {
+            this.tenDienThoai = tenDienThoai;
+        }
+
+        setHangSanXuat(hangSanXuat) {
+            this.hangSanXuat = hangSanXuat;
+        }
+
+        setGiaDT(giaDienThoai) {
+            this.giaDienThoai = giaDienThoai;
+        }
+
+        getMaDT() {
+            return this.maDienThoai;
+        }
+
+        getTenDT() {
+            return this.tenDienThoai;
+        }
+
+        getHangSanXuat() {
+            return this.hangSanXuat;
+        }
+
+        getGiaDT() {
+            return this.giaDienThoai;
+        }
+    }
+
+    class QuanLySanPhamDienThoai {
+        danhSachDienThoai = [];
+        viTriCanSua;
+
+        constructor() {
+        }
+
+        setDanhSachDienThoai(dienThoai) {
+            this.danhSachDienThoai.push(dienThoai);
+        }
+
+        hienThiDanhSach() {
+            let hienThi = '';
+            hienThi += `<div style="padding: 5px">Hiện có ${this.danhSachDienThoai.length} sản phẩm điện thoại</div>`;
+            hienThi += `<table class="bang2"><tr>
+                        <th>STT</th>
+                        <th>Mã điện thoại</th>
+                        <th>Tên</th>
+                        <th>Hãng sản xuất</th>
+                        <th>Giá (đvt: triệu đồng)</th>
+                        <th colspan="2">Thao tác</th></tr>`;
+            if (this.danhSachDienThoai.length > 0) {
+                this.sapXepDanhSachSanPhamDienThoai(this.danhSachDienThoai);
+                for (let i = 0; i < this.danhSachDienThoai.length; i++) {
+                    hienThi += `<tr class="cot_bang2">`;
+                    hienThi += `<td class="so_thu_tu">${i + 1}</td>
+                        <td class="ten_san_pham">${this.danhSachDienThoai[i].maDienThoai}</td>
+                        <td class="ten_san_pham">${this.danhSachDienThoai[i].tenDienThoai}</td>
+                        <td class="ten_san_pham">${this.danhSachDienThoai[i].hangSanXuat}</td>
+                        <td class="gia_san_pham">${this.danhSachDienThoai[i].giaDienThoai}</td>
+                        <td ><button class="bnt_sua" onclick="quanLySanPhamDienThoai.suaThongTinSanPham('${[i]}')">Sửa</button></td>
+                        <td ><button class="bnt_xoa" onclick="quanLySanPhamDienThoai.xoaSanPham('${[i]}')">Xóa</button></td>`
+                    hienThi += `</tr>`;
+                }
+            }
+            hienThi += `</table>`;
+            document.getElementById('hien_thi').innerHTML = hienThi;
+        }
+
+        themMoiSanPham() {
+            let maDienThoaiMoi = document.getElementById('ma_dien_thoai_moi').value;
+            let tenDienThoaiMoi = document.getElementById('ten_dien_thoai_moi').value;
+            let hangSanXuatmoi = document.getElementById('hang_san_xuat_moi').value;
+            let giaDienThoaiMoi = +document.getElementById('gia_dien_thoai_moi').value;
+            if (maDienThoaiMoi.trim() === '' || this.kiemTraTonTai(maDienThoaiMoi)) {
+                if (maDienThoaiMoi.trim() === '') {
+                    document.getElementById('hien_thi_loi').innerHTML = 'Mã điện thoại không được để trống';
+                } else {
+                    document.getElementById('hien_thi_loi').innerHTML = 'Mã điện thoại đã tồn tại';
+                }
+            } else {
+                document.getElementById('hien_thi_loi').innerHTML = '';
+                let dienThoai = new DienThoai(maDienThoaiMoi, tenDienThoaiMoi, hangSanXuatmoi, giaDienThoaiMoi);
+                this.setDanhSachDienThoai(dienThoai);
+                document.getElementById('ma_dien_thoai_moi').value = '';
+                document.getElementById('ten_dien_thoai_moi').value = '';
+                document.getElementById('hang_san_xuat_moi').value = '';
+                document.getElementById('gia_dien_thoai_moi').value = '';
+                this.hienThiDanhSach();
+            }
+        }
+
+        suaThongTinSanPham(viTriCanSua) {
+            document.getElementById('sua_ma_dien_thoai').value = quanLySanPhamDienThoai.danhSachDienThoai[viTriCanSua].maDienThoai;
+            document.getElementById('sua_ten_dien_thoai').value = quanLySanPhamDienThoai.danhSachDienThoai[viTriCanSua].tenDienThoai;
+            document.getElementById('sua_hang_san_xuat').value = quanLySanPhamDienThoai.danhSachDienThoai[viTriCanSua].hangSanXuat;
+            document.getElementById('sua_gia_dien_thoai').value = quanLySanPhamDienThoai.danhSachDienThoai[viTriCanSua].giaDienThoai;
+            this.viTriCanSua = viTriCanSua;
+            document.getElementById('btn_add').style.display = 'none';
+            document.getElementById('btn_edit').style.display = 'inline-block';
+            document.getElementById('them_san_pham').style.display = 'none';
+            document.getElementById('sua_san_pham').style.display = 'inline-block';
+            document.getElementById('ma_dien_thoai_moi').style.display = 'none';
+            document.getElementById('sua_ma_dien_thoai').style.display = 'inline-block';
+            document.getElementById('ten_dien_thoai_moi').style.display = 'none';
+            document.getElementById('sua_ten_dien_thoai').style.display = 'inline-block';
+            document.getElementById('hang_san_xuat_moi').style.display = 'none';
+            document.getElementById('sua_hang_san_xuat').style.display = 'inline-block';
+            document.getElementById('gia_dien_thoai_moi').style.display = 'none';
+            document.getElementById('sua_gia_dien_thoai').style.display = 'inline-block';
+        }
+
+        luuThongTinSanPham() {
+            if (confirm('Xác nhận thông tin sản phẩm điện thoại này')) {
+                this.danhSachDienThoai[this.viTriCanSua].maDienThoai = document.getElementById('sua_ma_dien_thoai').value;
+                this.danhSachDienThoai[this.viTriCanSua].tenDienThoai = document.getElementById('sua_ten_dien_thoai').value;
+                this.danhSachDienThoai[this.viTriCanSua].hangSanXuat = document.getElementById('sua_hang_san_xuat').value;
+                this.danhSachDienThoai[this.viTriCanSua].giaDienThoai = document.getElementById('sua_gia_dien_thoai').value;
+                document.getElementById('btn_add').style.display = 'inline-block';
+                document.getElementById('btn_edit').style.display = 'none';
+                document.getElementById('them_san_pham').style.display = 'inline-block';
+                document.getElementById('sua_san_pham').style.display = 'none';
+                document.getElementById('ma_dien_thoai_moi').style.display = 'inline-block';
+                document.getElementById('sua_ma_dien_thoai').style.display = 'none';
+                document.getElementById('ten_dien_thoai_moi').style.display = 'inline-block';
+                document.getElementById('sua_ten_dien_thoai').style.display = 'none';
+                document.getElementById('hang_san_xuat_moi').style.display = 'inline-block';
+                document.getElementById('sua_hang_san_xuat').style.display = 'none';
+                document.getElementById('gia_dien_thoai_moi').style.display = 'inline-block';
+                document.getElementById('sua_gia_dien_thoai').style.display = 'none';
+                document.getElementById('ma_dien_thoai_moi').value = '';
+                document.getElementById('ten_dien_thoai_moi').value = '';
+                document.getElementById('hang_san_xuat_moi').value = '';
+                document.getElementById('gia_dien_thoai_moi').value = '';
+                this.hienThiDanhSach();
+            }
+        }
+
+        xoaSanPham(viTriCanXoa) {
+            if (confirm('Bạn muốn xóa sản phẩm điên thoại này?')) {
+                this.danhSachDienThoai.splice(viTriCanXoa, 1);
+                this.hienThiDanhSach();
+            }
+        }
+
+        kiemTraTonTai(maDienThoai) {
+            for (let i = 0; i < this.danhSachDienThoai.length; i++) {
+                if (maDienThoai.toLowerCase() === this.danhSachDienThoai[i].maDienThoai.toLowerCase()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        sapXepDanhSachSanPhamDienThoai(danhSachDienThoai) {
+            for (let i = 0; i < danhSachDienThoai.length; i++) {
+                for (let j = 0; j < danhSachDienThoai.length; j++) {
+                    if (danhSachDienThoai[i].tenDienThoai < danhSachDienThoai[j].tenDienThoai) {
+                        let maDienThoai = danhSachDienThoai[i].maDienThoai;
+                        let tenDienThoai = danhSachDienThoai[i].tenDienThoai;
+                        let hangSanXuat = danhSachDienThoai[i].hangSanXuat;
+                        let giaDienThoai = danhSachDienThoai[i].giaDienThoai;
+                        danhSachDienThoai[i].maDienThoai = danhSachDienThoai[j].maDienThoai;
+                        danhSachDienThoai[i].tenDienThoai = danhSachDienThoai[j].tenDienThoai;
+                        danhSachDienThoai[i].hangSanXuat = danhSachDienThoai[j].hangSanXuat;
+                        danhSachDienThoai[i].giaDienThoai = danhSachDienThoai[j].giaDienThoai;
+                        danhSachDienThoai[j].maDienThoai = maDienThoai;
+                        danhSachDienThoai[j].tenDienThoai = tenDienThoai;
+                        danhSachDienThoai[j].hangSanXuat = hangSanXuat;
+                        danhSachDienThoai[j].giaDienThoai = giaDienThoai;
+                    }
+                }
+            }
+        }
+    }
+
+    let quanLySanPhamDienThoai = new QuanLySanPhamDienThoai();
+</script>
+</html>

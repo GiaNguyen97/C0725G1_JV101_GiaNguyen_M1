@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    let n;
+    let tongSoChan = 0;
+    let tongSoLe = 0;
+
+    do {
+        n = +prompt('nhập số phần tử của mảng');
+        if (n <= 20 && n > 0 && Number.isInteger(n)) {
+            break;
+        } else {
+            alert('Nhập n là số nguyên dương nhỏ hơn hoặc bằng 20');
+        }
+    }
+    while (true) ;
+
+    let array = new Array(n);
+    document.write('[');
+    for (let i = 0; i < array.length; i++) {
+        array[i] = +prompt(`Nhập giá trị phần tử thứ ${i + 1}`);
+        if (array[i] % 2 === 0) {
+            tongSoChan += array[i];
+        } else {
+            tongSoLe += array[i];
+        }
+        if (i === array.length - 1) {
+            document.write(array[i] + ']<br>');
+        } else {
+            document.write(array[i] + ', ');
+        }
+    }
+
+    document.write(`Hiệu của tổng các số chẵn và tổng các số lẻ trong mảng là : ${tongSoChan - tongSoLe}`);
+</script>
+</html>
